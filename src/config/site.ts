@@ -1,4 +1,13 @@
 export const siteConfig = {
+  header: {
+    brand: "Ninja Fintech",
+    menuItems: [
+      { label: "Sign Up", href: "#" },
+      { label: "Login", href: "#" },
+      { label: "Contact", href: "#" },
+      { label: "Help", href: "#" },
+    ],
+  },
   texts: {
     hero: {
       title: "₹2 Lakh Crores lying unclaimed with the Regulators. Make sure yours isn't!",
