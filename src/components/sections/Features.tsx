@@ -1,35 +1,40 @@
-import { Banknote, ArrowDownUp } from "lucide-react";
+import { Shield, CheckCircle, Search } from "lucide-react";
 import { siteConfig } from "@/config/site";
 
 const features = [
   {
-    icon: Banknote,
-    title: "Try a Side Hustle",
-    description: "Put more money in your pocket with a side job.",
+    icon: Shield,
+    title: siteConfig.texts.features.vault.title,
+    description: siteConfig.texts.features.vault.description,
   },
   {
-    icon: ArrowDownUp,
-    title: "Set up direct deposit",
-    description: "Get paid up to 2 days early.",
+    icon: CheckCircle,
+    title: siteConfig.texts.features.nomination.title,
+    description: siteConfig.texts.features.nomination.description,
+  },
+  {
+    icon: Search,
+    title: siteConfig.texts.features.claims.title,
+    description: siteConfig.texts.features.claims.description,
   },
 ];
 
 export const Features = () => {
   return (
-    <section className="py-8 bg-white">
+    <section className="py-12 bg-white">
       <div className="container mx-auto px-4">
-        <div className="max-w-sm mx-auto space-y-4">
+        <div className="max-w-3xl mx-auto space-y-6">
           {features.map((feature, index) => (
             <div
               key={feature.title}
-              className="flex items-center p-4 rounded-xl bg-ninja-gray-100 hover:bg-ninja-gray-200 transition-colors animate-fadeIn cursor-pointer"
+              className="flex items-center justify-between p-6 rounded-xl bg-ninja-gray-100 hover:bg-ninja-gray-200 transition-colors animate-fadeIn"
               style={{ animationDelay: `${index * 200}ms` }}
             >
-              <div className="flex-1">
-                <h3 className="text-base font-semibold text-ninja-gray-900 mb-1">{feature.title}</h3>
+              <div className="flex-1 pr-6">
+                <h3 className="text-lg font-semibold text-ninja-gray-900 mb-2">{feature.title}</h3>
                 <p className="text-sm text-ninja-gray-600">{feature.description}</p>
               </div>
-              <feature.icon className="w-8 h-8 text-ninja-primary ml-4" />
+              <feature.icon className="w-10 h-10 text-ninja-primary flex-shrink-0" />
             </div>
           ))}
         </div>
