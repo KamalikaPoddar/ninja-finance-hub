@@ -1,38 +1,35 @@
-import { Shield, UserCheck, Search } from "lucide-react";
+import { Banknote, ArrowDownUp } from "lucide-react";
 import { siteConfig } from "@/config/site";
 
 const features = [
   {
-    icon: Shield,
-    title: siteConfig.texts.features.vault.title,
-    description: siteConfig.texts.features.vault.description,
+    icon: Banknote,
+    title: "Try a Side Hustle",
+    description: "Put more money in your pocket with a side job.",
   },
   {
-    icon: UserCheck,
-    title: siteConfig.texts.features.nomination.title,
-    description: siteConfig.texts.features.nomination.description,
-  },
-  {
-    icon: Search,
-    title: siteConfig.texts.features.claims.title,
-    description: siteConfig.texts.features.claims.description,
+    icon: ArrowDownUp,
+    title: "Set up direct deposit",
+    description: "Get paid up to 2 days early.",
   },
 ];
 
 export const Features = () => {
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="py-8 bg-white">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+        <div className="max-w-sm mx-auto space-y-4">
           {features.map((feature, index) => (
             <div
               key={feature.title}
-              className="flex flex-col items-center text-center p-6 rounded-lg hover:bg-ninja-gray-100 transition-colors animate-fadeIn"
+              className="flex items-center p-4 rounded-xl bg-ninja-gray-100 hover:bg-ninja-gray-200 transition-colors animate-fadeIn cursor-pointer"
               style={{ animationDelay: `${index * 200}ms` }}
             >
-              <feature.icon className="w-12 h-12 text-ninja-primary mb-4" />
-              <h3 className="text-xl font-semibold text-ninja-gray-900 mb-3">{feature.title}</h3>
-              <p className="text-ninja-gray-600">{feature.description}</p>
+              <div className="flex-1">
+                <h3 className="text-base font-semibold text-ninja-gray-900 mb-1">{feature.title}</h3>
+                <p className="text-sm text-ninja-gray-600">{feature.description}</p>
+              </div>
+              <feature.icon className="w-8 h-8 text-ninja-primary ml-4" />
             </div>
           ))}
         </div>
