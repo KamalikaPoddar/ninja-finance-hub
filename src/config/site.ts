@@ -7,11 +7,11 @@ export const siteConfig = {
     },
     features: {
       vault: {
-        title: "Secure Unified Financial Vault",
-        description: "Access all your financial accounts in one secure location. Monitor balances, transactions, and more.",
+        title: "Secure Financial Vault",
+        description: "Access all your financial accounts in one secure location.",
       },
       nomination: {
-        title: "Easy Nomination",
+        title: "One Click Nomination",
         description: "Simplify the nomination process for all your accounts. Secure your family's future in minutes.",
       },
       claims: {
