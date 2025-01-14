@@ -12,11 +12,11 @@ export const siteConfig = {
       },
       nomination: {
         title: "One Click Nomination",
-        description: "Simplify the nomination process for all your accounts. Secure your family's future in minutes.",
+        description: "Secure your family's future in minutes.",
       },
       claims: {
         title: "Discover and Track Claims",
-        description: "Find unclaimed assets that belong to you or your family. Track the status of your claims effortlessly.",
+        description: "Find and Track unclaimed assets that belong to you or your family.",
       },
     },
     footer: {
