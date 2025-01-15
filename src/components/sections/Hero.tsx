@@ -1,5 +1,6 @@
 import { siteConfig } from "@/config/site";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 export const Hero = () => {
   return (
@@ -13,12 +14,14 @@ export const Hero = () => {
             <p className="text-base md:text-lg text-ninja-gray-600">
               {siteConfig.texts.hero.subtitle}
             </p>
-            <Button
-              size="lg"
-              className="w-full md:w-auto bg-ninja-primary hover:bg-ninja-primary/90 text-white rounded-full text-base"
-            >
-              {siteConfig.texts.hero.cta}
-            </Button>
+            <Link to="/signup">
+              <Button
+                size="lg"
+                className="w-full md:w-auto bg-ninja-primary hover:bg-ninja-primary/90 text-white rounded-full text-base"
+              >
+                {siteConfig.texts.hero.cta}
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
