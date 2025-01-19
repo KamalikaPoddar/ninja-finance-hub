@@ -1,8 +1,9 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import AccountCard from '@/components/vault/AccountCard';
 import { Header } from '@/components/layout/Header';
-import { Lock } from 'lucide-react';
+import { Lock, ChevronDown, ChevronUp } from 'lucide-react';
 import {
   Tooltip,
   TooltipContent,
@@ -13,6 +14,7 @@ import { theme } from '@/config/theme';
 
 const Vault = () => {
   const navigate = useNavigate();
+  const [isExpanded, setIsExpanded] = useState(false);
 
   // TODO: Fetch accounts from API
   const accounts = [
@@ -24,10 +26,29 @@ const Vault = () => {
       isConnected: true,
       isDormant: false,
       hasNominee: true,
-      isFamilyVerified: false // TODO: Set based on actual verification
+      isFamilyVerified: false
+    },
+    {
+      id: '2',
+      name: 'Bank Two',
+      balance: 25000,
+      lastTransactionDate: '2024-12-20',
+      isConnected: false,
+      isDormant: true,
+      hasNominee: false
+    },
+    {
+      id: '3',
+      name: 'Bank Three',
+      balance: 15000,
+      lastTransactionDate: '2025-01-10',
+      isConnected: true,
+      isDormant: false,
+      hasNominee: true
     }
   ];
 
+  const visibleAccounts = isExpanded ? accounts : [accounts[0]];
   const isFamilyVerified = accounts[0].isFamilyVerified;
 
   return (
@@ -52,13 +73,43 @@ const Vault = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {accounts.map(account => (
+            {visibleAccounts.map(account => (
               <AccountCard
                 key={account.id}
                 account={account}
                 onClick={() => navigate(`/account/${account.id}`)}
               />
             ))}
+          </div>
+
+          <div className="mt-4 flex justify-center">
+            {!isExpanded ? (
+              <Button
+                variant="outline"
+                className="gap-2"
+                style={{
+                  borderColor: theme.colors.primary,
+                  color: theme.colors.primary
+                }}
+                onClick={() => setIsExpanded(true)}
+              >
+                <ChevronDown className="h-4 w-4" />
+                View all {accounts.length} accounts
+              </Button>
+            ) : (
+              <Button
+                variant="outline"
+                className="gap-2"
+                style={{
+                  borderColor: theme.colors.primary,
+                  color: theme.colors.primary
+                }}
+                onClick={() => setIsExpanded(false)}
+              >
+                <ChevronUp className="h-4 w-4" />
+                Collapse
+              </Button>
+            )}
           </div>
         </div>
 
@@ -154,7 +205,7 @@ const Vault = () => {
         </div>
 
         {/* Consult Experts Section */}
-        <div>
+        <div className="mb-8">
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold" style={{ color: theme.colors.text.primary }}>
               Consult Experts
@@ -183,6 +234,24 @@ const Vault = () => {
           >
             <p className="text-center" style={{ color: theme.colors.text.secondary }}>
               Expert consultation functionality coming soon
+            </p>
+          </div>
+        </div>
+
+        {/* Finance Your Dreams Section */}
+        <div>
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-2xl font-bold" style={{ color: theme.colors.text.primary }}>
+              Finance Your Dreams
+            </h1>
+          </div>
+
+          <div 
+            className="p-6 rounded-lg" 
+            style={{ backgroundColor: theme.colors.surface }}
+          >
+            <p className="text-center" style={{ color: theme.colors.text.secondary }}>
+              Dream financing functionality coming soon
             </p>
           </div>
         </div>
