@@ -17,6 +17,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/vault" element={<div>Vault Page (Coming Soon)</div>} />
+          <Route path="/consent" element={<div>Consent Page (Coming Soon)</div>} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Eye, EyeOff, AtSign, Phone } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -37,6 +38,7 @@ type LoginFormData = {
 };
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showLoginPassword, setShowLoginPassword] = useState(false);
@@ -68,6 +70,7 @@ const Signup = () => {
   const onSignupSubmit = (data: SignupFormData) => {
     console.log("Signup data:", data);
     toast.success("Account created successfully!");
+    navigate("/consent"); // Navigate to consent page after signup
   };
 
   const onLoginSubmit = (data: LoginFormData) => {
@@ -79,12 +82,14 @@ const Signup = () => {
     if (useOTP) {
       if (data.otp === validOTP) {
         toast.success("Login successful!");
+        navigate("/vault"); // Navigate to vault page after successful login
       } else {
         toast.error("Invalid OTP");
       }
     } else {
       if (data.password === validPassword) {
         toast.success("Login successful!");
+        navigate("/vault"); // Navigate to vault page after successful login
       } else {
         toast.error("Invalid password");
       }
