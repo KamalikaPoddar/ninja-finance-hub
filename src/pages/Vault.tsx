@@ -92,7 +92,7 @@ const Vault = () => {
         </div>
 
         {/* Discover Lost Assets Section */}
-        <div>
+        <div className="mb-8">
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold" style={{ color: theme.colors.text.primary }}>
               Discover Lost Assets
@@ -150,6 +150,40 @@ const Vault = () => {
                 Complete family verification to unlock this feature
               </p>
             )}
+          </div>
+        </div>
+
+        {/* Consult Experts Section */}
+        <div>
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-2xl font-bold" style={{ color: theme.colors.text.primary }}>
+              Consult Experts
+            </h1>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <div 
+                    className="flex items-center gap-2"
+                    style={{ color: theme.colors.primary }}
+                  >
+                    <Lock className="h-5 w-5" />
+                    <span>Locked</span>
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>This feature is only available after completing family verification</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
+
+          <div 
+            className="p-6 rounded-lg" 
+            style={{ backgroundColor: theme.colors.surface }}
+          >
+            <p className="text-center" style={{ color: theme.colors.text.secondary }}>
+              Expert consultation functionality coming soon
+            </p>
           </div>
         </div>
       </div>

@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useNavigate } from "react-router-dom";
 import { siteConfig } from "@/config/site";
+import { theme } from "@/config/theme";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,31 +21,74 @@ export const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md z-50 border-b border-ninja-gray-200">
+    <header 
+      className="fixed top-0 left-0 right-0 backdrop-blur-md z-50 border-b"
+      style={{ 
+        backgroundColor: theme.colors.surface + 'CC',
+        borderColor: theme.colors.background
+      }}
+    >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
-          <a href="/" className="text-xl md:text-2xl font-bold text-ninja-primary">
+          <a 
+            href="/" 
+            className="text-xl md:text-2xl font-bold"
+            style={{ color: theme.colors.primary }}
+          >
             {siteConfig.header.brand}
           </a>
 
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon">
+            <Button 
+              variant="ghost" 
+              size="icon"
+              style={{ color: theme.colors.text.primary }}
+            >
               <UserRound className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon">
+            <Button 
+              variant="ghost" 
+              size="icon"
+              style={{ color: theme.colors.text.primary }}
+            >
               <Bell className="h-5 w-5" />
             </Button>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon">
+                <Button 
+                  variant="ghost" 
+                  size="icon"
+                  style={{ color: theme.colors.text.primary }}
+                >
                   <Menu className="h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuItem>About</DropdownMenuItem>
-                <DropdownMenuItem>FAQ</DropdownMenuItem>
-                <DropdownMenuItem>Contact</DropdownMenuItem>
-                <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
+              <DropdownMenuContent 
+                align="end" 
+                className="w-48"
+                style={{ backgroundColor: theme.colors.surface }}
+              >
+                <DropdownMenuItem
+                  style={{ color: theme.colors.text.primary }}
+                >
+                  About
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  style={{ color: theme.colors.text.primary }}
+                >
+                  FAQ
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  style={{ color: theme.colors.text.primary }}
+                >
+                  Contact
+                </DropdownMenuItem>
+                <DropdownMenuItem 
+                  onClick={handleLogout}
+                  style={{ color: theme.colors.error }}
+                >
+                  Logout
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>

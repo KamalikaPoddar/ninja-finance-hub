@@ -4,6 +4,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 import { Header } from '@/components/layout/Header';
 import { ArrowLeft, AlertTriangle, User, FileSignature } from 'lucide-react';
+import { theme } from '@/config/theme';
 
 const AccountDetail = () => {
   const { accountId } = useParams();
@@ -34,34 +35,62 @@ const AccountDetail = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" style={{ backgroundColor: theme.colors.background }}>
       <Header />
       <div className="max-w-2xl mx-auto p-6 pt-24">
         <div className="flex items-center gap-4 mb-6">
-          <Button variant="ghost" size="icon" onClick={() => navigate(-1)}>
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={() => navigate(-1)}
+            style={{ color: theme.colors.text.primary }}
+          >
             <ArrowLeft className="h-5 w-5" />
           </Button>
-          <h1 className="text-2xl font-bold">{account.name}</h1>
+          <h1 
+            className="text-2xl font-bold"
+            style={{ color: theme.colors.text.primary }}
+          >
+            {account.name}
+          </h1>
         </div>
         
-        <Card>
+        <Card style={{ backgroundColor: theme.colors.surface }}>
           <CardHeader>
-            <CardTitle>Account Details</CardTitle>
-            <p className="text-sm text-gray-500">Last updated: {account.lastUpdated}</p>
+            <CardTitle style={{ color: theme.colors.text.primary }}>
+              Account Details
+            </CardTitle>
+            <p 
+              className="text-sm"
+              style={{ color: theme.colors.text.secondary }}
+            >
+              Last updated: {account.lastUpdated}
+            </p>
           </CardHeader>
           
           <CardContent className="space-y-4">
             {/* Balance */}
             <div>
-              <h3 className="font-medium">Balance</h3>
-              <p className="text-2xl font-bold">
+              <h3 
+                className="font-medium"
+                style={{ color: theme.colors.text.primary }}
+              >
+                Balance
+              </h3>
+              <p 
+                className="text-2xl font-bold"
+                style={{ color: theme.colors.text.primary }}
+              >
                 ₹{account.balance.toLocaleString()}
               </p>
             </div>
 
             {/* Dormancy Warning */}
             {account.daysToDormancy && account.daysToDormancy <= 30 && (
-              <div className="flex items-center gap-2 text-yellow-600">
+              <div 
+                className="flex items-center gap-2"
+                style={{ color: theme.colors.warning }}
+              >
                 <AlertTriangle className="h-4 w-4" />
                 <span>
                   Account may become dormant in {account.daysToDormancy} days
@@ -71,29 +100,59 @@ const AccountDetail = () => {
 
             {/* Nominee Information */}
             <div>
-              <h3 className="font-medium">Nominee Information</h3>
-              <div className="flex items-center gap-2">
+              <h3 
+                className="font-medium"
+                style={{ color: theme.colors.text.primary }}
+              >
+                Nominee Information
+              </h3>
+              <div 
+                className="flex items-center gap-2"
+                style={{ color: theme.colors.text.secondary }}
+              >
                 <User className="h-4 w-4" />
                 <span>{account.nominee}</span>
               </div>
-              <Button variant="link" className="p-0">
+              <Button 
+                variant="link" 
+                className="p-0"
+                style={{ color: theme.colors.primary }}
+              >
                 Update Nominee
               </Button>
             </div>
 
             {/* Recent Transactions */}
             <div>
-              <h3 className="font-medium mb-2">Recent Transactions</h3>
+              <h3 
+                className="font-medium mb-2"
+                style={{ color: theme.colors.text.primary }}
+              >
+                Recent Transactions
+              </h3>
               <div className="space-y-2">
                 {account.recentTransactions.map((transaction, index) => (
-                  <div key={index} className="flex justify-between">
+                  <div 
+                    key={index} 
+                    className="flex justify-between"
+                    style={{ color: theme.colors.text.primary }}
+                  >
                     <div>
                       <p>{transaction.description}</p>
-                      <p className="text-sm text-gray-500">
+                      <p 
+                        className="text-sm"
+                        style={{ color: theme.colors.text.secondary }}
+                      >
                         {new Date(transaction.date).toLocaleDateString()}
                       </p>
                     </div>
-                    <p className={transaction.amount > 0 ? 'text-green-600' : 'text-red-600'}>
+                    <p 
+                      style={{ 
+                        color: transaction.amount > 0 
+                          ? theme.colors.success 
+                          : theme.colors.error
+                      }}
+                    >
                       ₹{Math.abs(transaction.amount).toLocaleString()}
                     </p>
                   </div>
@@ -103,8 +162,20 @@ const AccountDetail = () => {
 
             {/* eSign Forms */}
             <div>
-              <h3 className="font-medium">eSign Forms</h3>
-              <Button variant="outline" className="gap-2">
+              <h3 
+                className="font-medium"
+                style={{ color: theme.colors.text.primary }}
+              >
+                eSign Forms
+              </h3>
+              <Button 
+                variant="outline" 
+                className="gap-2"
+                style={{ 
+                  borderColor: theme.colors.primary,
+                  color: theme.colors.primary
+                }}
+              >
                 <FileSignature className="h-4 w-4" />
                 View eSign Documents
               </Button>
@@ -112,7 +183,14 @@ const AccountDetail = () => {
           </CardContent>
 
           <CardFooter className="flex justify-end">
-            <Button variant="destructive" onClick={handleRemoveAccount}>
+            <Button 
+              variant="destructive"
+              style={{ 
+                backgroundColor: theme.colors.error,
+                color: theme.colors.surface
+              }}
+              onClick={handleRemoveAccount}
+            >
               Remove Account
             </Button>
           </CardFooter>

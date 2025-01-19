@@ -1,6 +1,6 @@
 export const theme = {
   colors: {
-    primary: '#7C3AED', // Purple
+    primary: '#B19DC9', // Purple
     secondary: '#2563EB', // Blue
     tertiary: '#059669', // Green
     background: '#F9FAFB',
