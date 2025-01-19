@@ -1,29 +1,26 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import Signup from "./pages/Signup";
-import Vault from "./pages/Vault";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Toaster } from '@/components/ui/sonner';
+import Index from '@/pages/Index';
+import Signup from '@/pages/Signup';
+import Vault from '@/pages/Vault';
+import ConsentPage from '@/pages/ConsentPage';
+import AccountDetail from '@/pages/AccountDetail';
 
-const queryClient = new QueryClient();
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
+function App() {
+  return (
+    <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/vault" element={<Vault />} />
-          <Route path="/consent" element={<div>Consent Page (Coming Soon)</div>} />
+          <Route path="/consent" element={<ConsentPage />} />
+          <Route path="/account/:accountId" element={<AccountDetail />} />
         </Routes>
       </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+      <Toaster />
+    </>
+  );
+}
 
 export default App;

@@ -1,14 +1,19 @@
-export type AccountType = "savings" | "checking" | "investment" | "credit";
-
 export interface Account {
   id: string;
-  institutionName: string;
-  logoUrl?: string;
+  name: string;
   balance: number;
-  lastTransactionDate: string;
-  nomineeStatus: "active" | "missing";
-  isDormant: boolean;
-  type: AccountType;
-  isTokenExpired?: boolean;
-  hasPartialInfo?: boolean;
+  lastUpdated?: string;
+  isActive?: boolean;
+  nominee?: string;
+  isConnected: boolean;
+  lastTransactionDate?: string;
+  isDormant?: boolean;
+  hasNominee?: boolean;
+  isFamilyVerified?: boolean;
+}
+
+export interface Institution {
+  id: string;
+  name: string;
+  logoUrl?: string;
 }

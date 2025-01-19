@@ -1,71 +1,116 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { AlertTriangle, User2 } from "lucide-react";
-import { Account } from "@/types/account";
-import { formatDistanceToNow } from "date-fns";
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { CalendarDays, Link2, AlertTriangle, UserX } from 'lucide-react';
+import { theme } from '@/config/theme';
 
 interface AccountCardProps {
-  account: Account;
-  onCardClick: (account: Account) => void;
+  account: {
+    id: string;
+    name: string;
+    balance: number;
+    lastTransactionDate?: string;
+    isConnected: boolean;
+    isDormant?: boolean;
+    hasNominee?: boolean;
+  };
+  onClick: () => void;
 }
 
-export const AccountCard = ({ account, onCardClick }: AccountCardProps) => {
-  const formattedDate = formatDistanceToNow(new Date(account.lastTransactionDate), { addSuffix: true });
-
+const AccountCard = ({ account, onClick }: AccountCardProps) => {
   return (
     <Card 
-      className="hover:shadow-md transition-shadow cursor-pointer"
-      onClick={() => onCardClick(account)}
+      className="hover:shadow-md transition-shadow cursor-pointer" 
+      onClick={onClick}
+      style={{ backgroundColor: theme.colors.surface }}
     >
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <div className="flex items-center gap-2">
-          {account.logoUrl ? (
-            <img src={account.logoUrl} alt={account.institutionName} className="w-8 h-8 rounded" />
-          ) : (
-            <div className="w-8 h-8 bg-ninja-gray-200 rounded flex items-center justify-center">
-              {account.institutionName[0]}
-            </div>
-          )}
-          <div>
-            <h3 className="font-semibold text-lg">{account.institutionName}</h3>
-            <p className="text-sm text-ninja-gray-600">{account.type}</p>
-          </div>
-        </div>
-        {account.isTokenExpired && (
-          <Button variant="outline" size="sm" className="text-destructive border-destructive">
-            Re-Authorize
-          </Button>
-        )}
+      <CardHeader className="p-4">
+        <CardTitle 
+          className="text-lg"
+          style={{ color: theme.colors.text.primary }}
+        >
+          {account.name}
+        </CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="space-y-2">
-          <div className="flex justify-between items-center">
-            <span className="text-sm text-ninja-gray-600">Balance</span>
-            <span className="font-semibold">
-              {account.hasPartialInfo ? "Unavailable" : `₹${account.balance.toLocaleString()}`}
+      
+      <CardContent className="space-y-2 p-4 pt-0">
+        {/* Balance */}
+        <p 
+          className="text-2xl font-bold"
+          style={{ color: theme.colors.text.primary }}
+        >
+          ₹{account.balance.toLocaleString()}
+        </p>
+
+        {/* Last Transaction Date */}
+        {account.lastTransactionDate && (
+          <div 
+            className="flex items-center gap-2 text-sm"
+            style={{ color: theme.colors.text.secondary }}
+          >
+            <CalendarDays className="h-4 w-4" />
+            <span>
+              Last transaction: {new Date(account.lastTransactionDate).toLocaleDateString()}
             </span>
           </div>
-          <div className="flex justify-between items-center">
-            <span className="text-sm text-ninja-gray-600">Last Transaction</span>
-            <span>{account.hasPartialInfo ? "Unavailable" : formattedDate}</span>
-          </div>
-          <div className="flex gap-2 mt-3">
-            {account.isDormant && (
-              <Badge variant="destructive" className="flex items-center gap-1">
-                <AlertTriangle className="w-3 h-3" />
-                Dormant
-              </Badge>
-            )}
-            {account.nomineeStatus === "missing" && (
-              <Badge variant="secondary" className="flex items-center gap-1">
-                <User2 className="w-3 h-3" />
-                No Nominee
-              </Badge>
-            )}
-          </div>
-        </div>
+        )}
       </CardContent>
+
+      <CardFooter className="flex justify-between p-4">
+        {!account.isConnected && (
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="h-8 px-2"
+            style={{ 
+              borderColor: theme.colors.error,
+              color: theme.colors.error
+            }}
+            onClick={(e) => {
+              e.stopPropagation();
+              // TODO: Handle reauthorise
+            }}
+          >
+            <Link2 className="h-3 w-3 mr-1" />
+            <span className="text-xs">Reauthorise</span>
+          </Button>
+        )}
+        
+        <div className="flex gap-2">
+          {account.isDormant && (
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="h-8 px-2"
+              style={{ 
+                borderColor: theme.colors.error,
+                color: theme.colors.error
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <AlertTriangle className="h-3 w-3 mr-1" />
+              <span className="text-xs">Dormant</span>
+            </Button>
+          )}
+          
+          {!account.hasNominee && (
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="h-8 px-2"
+              style={{ 
+                borderColor: theme.colors.primary,
+                color: theme.colors.primary
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <UserX className="h-3 w-3 mr-1" />
+              <span className="text-xs">No Nominee</span>
+            </Button>
+          )}
+        </div>
+      </CardFooter>
     </Card>
   );
 };
+
+export default AccountCard;
