@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, AtSign, Phone } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -201,11 +201,15 @@ const Signup = () => {
                       <FormItem>
                         <FormLabel>Email</FormLabel>
                         <FormControl>
-                          <Input
-                            type="email"
-                            placeholder="john.doe@example.com"
-                            {...field}
-                          />
+                          <div className="relative">
+                            <AtSign className="absolute left-3 top-2.5 h-5 w-5 text-ninja-gray-500" />
+                            <Input
+                              type="email"
+                              placeholder="john.doe@example.com"
+                              className="pl-10"
+                              {...field}
+                            />
+                          </div>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -219,7 +223,15 @@ const Signup = () => {
                       <FormItem>
                         <FormLabel>Mobile Number</FormLabel>
                         <FormControl>
-                          <Input type="tel" placeholder="+91 9999999999" {...field} />
+                          <div className="relative">
+                            <Phone className="absolute left-3 top-2.5 h-5 w-5 text-ninja-gray-500" />
+                            <Input
+                              type="tel"
+                              placeholder="+91 9999999999"
+                              className="pl-10"
+                              {...field}
+                            />
+                          </div>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -233,7 +245,25 @@ const Signup = () => {
                       <FormItem>
                         <FormLabel>Password</FormLabel>
                         <FormControl>
-                          <Input type={showPassword ? "text" : "password"} {...field} />
+                          <div className="relative">
+                            <Input
+                              type={showPassword ? "text" : "password"}
+                              {...field}
+                            />
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="icon"
+                              className="absolute right-0 top-0"
+                              onClick={() => setShowPassword(!showPassword)}
+                            >
+                              {showPassword ? (
+                                <EyeOff className="h-4 w-4" />
+                              ) : (
+                                <Eye className="h-4 w-4" />
+                              )}
+                            </Button>
+                          </div>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -247,7 +277,27 @@ const Signup = () => {
                       <FormItem>
                         <FormLabel>Confirm Password</FormLabel>
                         <FormControl>
-                          <Input type={showConfirmPassword ? "text" : "password"} {...field} />
+                          <div className="relative">
+                            <Input
+                              type={showConfirmPassword ? "text" : "password"}
+                              {...field}
+                            />
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="icon"
+                              className="absolute right-0 top-0"
+                              onClick={() =>
+                                setShowConfirmPassword(!showConfirmPassword)
+                              }
+                            >
+                              {showConfirmPassword ? (
+                                <EyeOff className="h-4 w-4" />
+                              ) : (
+                                <Eye className="h-4 w-4" />
+                              )}
+                            </Button>
+                          </div>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -346,8 +396,8 @@ const Signup = () => {
                               maxLength={6}
                               render={({ slots }) => (
                                 <InputOTPGroup>
-                                  {slots.map((slot, index) => (
-                                    <InputOTPSlot key={index} {...slot} />
+                                  {slots.map((slot, i) => (
+                                    <InputOTPSlot key={i} index={i} {...slot} />
                                   ))}
                                 </InputOTPGroup>
                               )}
