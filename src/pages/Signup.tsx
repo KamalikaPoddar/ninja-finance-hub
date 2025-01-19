@@ -91,6 +91,14 @@ const Signup = () => {
     }
   };
 
+  const handleOTPToggle = (pressed: boolean) => {
+    setUseOTP(pressed);
+    if (pressed) {
+      // Here you would typically trigger the OTP sending
+      toast.success("OTP sent to your registered mobile/email");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background pt-16 md:pt-20">
       <div className="container max-w-lg mx-auto px-4 py-8">
@@ -377,7 +385,7 @@ const Signup = () => {
                     <span className="text-sm text-ninja-gray-600">Verify using:</span>
                     <Toggle
                       pressed={useOTP}
-                      onPressedChange={(pressed) => setUseOTP(pressed)}
+                      onPressedChange={handleOTPToggle}
                       className="data-[state=on]:bg-ninja-primary"
                     >
                       {useOTP ? "OTP" : "Password"}
@@ -397,7 +405,7 @@ const Signup = () => {
                               render={({ slots }) => (
                                 <InputOTPGroup>
                                   {slots.map((slot, i) => (
-                                    <InputOTPSlot key={i} index={i} {...slot} />
+                                    <InputOTPSlot key={i} {...slot} index={i} />
                                   ))}
                                 </InputOTPGroup>
                               )}
