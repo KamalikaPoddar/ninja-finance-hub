@@ -10,6 +10,12 @@ export interface Account {
   isDormant?: boolean;
   hasNominee?: boolean;
   isFamilyVerified?: boolean;
+  daysToDormancy?: number;
+  recentTransactions?: {
+    date: string;
+    amount: number;
+    description: string;
+  }[];
 }
 
 export interface Institution {

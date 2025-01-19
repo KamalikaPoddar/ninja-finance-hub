@@ -5,25 +5,82 @@ import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/componen
 import { Header } from '@/components/layout/Header';
 import { ArrowLeft, AlertTriangle, User, FileSignature } from 'lucide-react';
 import { theme } from '@/config/theme';
+import { Account } from '@/types/account';
 
 const AccountDetail = () => {
   const { accountId } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  // TODO: Fetch account details using accountId
-  const account = {
-    name: 'Sample Account',
-    balance: 10000,
-    lastUpdated: new Date().toLocaleString(),
-    isActive: true,
-    nominee: 'John Doe',
-    daysToDormancy: 15,
-    recentTransactions: [
-      { date: '2025-01-15', amount: -500, description: 'Grocery Store' },
-      { date: '2025-01-10', amount: 2000, description: 'Salary' }
-    ]
-  };
+  // TODO: Fetch accounts from API
+  const accounts: Account[] = [
+    {
+      id: '1',
+      name: 'Bank One',
+      balance: 10000,
+      lastUpdated: new Date().toLocaleString(),
+      isActive: true,
+      nominee: 'John Doe',
+      daysToDormancy: 15,
+      recentTransactions: [
+        { date: '2025-01-15', amount: -500, description: 'Grocery Store' },
+        { date: '2025-01-10', amount: 2000, description: 'Salary' }
+      ],
+      isConnected: true,
+      lastTransactionDate: '2025-01-15',
+      isDormant: false,
+      hasNominee: true
+    },
+    {
+      id: '2',
+      name: 'Bank Two',
+      balance: 25000,
+      lastUpdated: new Date().toLocaleString(),
+      isActive: true,
+      nominee: 'Jane Smith',
+      daysToDormancy: 30,
+      recentTransactions: [
+        { date: '2025-01-12', amount: -1000, description: 'Rent' },
+        { date: '2025-01-05', amount: 3000, description: 'Freelance Work' }
+      ],
+      isConnected: false,
+      lastTransactionDate: '2024-12-20',
+      isDormant: true,
+      hasNominee: false
+    },
+    {
+      id: '3',
+      name: 'Bank Three',
+      balance: 15000,
+      lastUpdated: new Date().toLocaleString(),
+      isActive: true,
+      nominee: 'Alice Johnson',
+      daysToDormancy: 45,
+      recentTransactions: [
+        { date: '2025-01-08', amount: -750, description: 'Utilities' },
+        { date: '2025-01-02', amount: 1500, description: 'Investment Return' }
+      ],
+      isConnected: true,
+      lastTransactionDate: '2025-01-10',
+      isDormant: false,
+      hasNominee: true
+    }
+  ];
+
+  const account = accounts.find(acc => acc.id === accountId);
+
+  if (!account) {
+    return (
+      <div className="min-h-screen" style={{ backgroundColor: theme.colors.background }}>
+        <Header />
+        <div className="max-w-2xl mx-auto p-6 pt-24">
+          <p style={{ color: theme.colors.text.primary }}>
+            Account not found
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   const handleRemoveAccount = () => {
     // TODO: Implement account removal logic
