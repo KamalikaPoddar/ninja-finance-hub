@@ -1,10 +1,23 @@
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Bell, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useNavigate } from "react-router-dom";
 import { siteConfig } from "@/config/site";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Add logout logic here
+    navigate("/");
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md z-50 border-b border-ninja-gray-200">
@@ -14,44 +27,29 @@ export const Header = () => {
             {siteConfig.header.brand}
           </a>
 
-          <nav className="hidden md:flex items-center space-x-8">
-            {siteConfig.header.menuItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-ninja-gray-700 hover:text-ninja-primary transition-colors"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </Button>
+          <div className="flex items-center gap-4">
+            <Button variant="ghost" size="icon">
+              <UserRound className="h-5 w-5" />
+            </Button>
+            <Button variant="ghost" size="icon">
+              <Bell className="h-5 w-5" />
+            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuItem>About</DropdownMenuItem>
+                <DropdownMenuItem>FAQ</DropdownMenuItem>
+                <DropdownMenuItem>Contact</DropdownMenuItem>
+                <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
       </div>
-
-      {isMenuOpen && (
-        <div className="md:hidden bg-white border-t border-ninja-gray-200">
-          <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-            {siteConfig.header.menuItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-ninja-gray-700 hover:text-ninja-primary transition-colors"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-        </div>
-      )}
     </header>
   );
 };

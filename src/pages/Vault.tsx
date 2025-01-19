@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/select";
 import { AccountCard } from "@/components/vault/AccountCard";
 import { Account, AccountType } from "@/types/account";
-import { Bell, Plus } from "lucide-react";
+import { Bell, Plus, Search, Filter, ArrowUpDown } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 
@@ -53,6 +53,7 @@ const Vault = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState<AccountType | "all">("all");
   const [sortBy, setSortBy] = useState<"balance" | "name" | "date">("balance");
+  const [showSearch, setShowSearch] = useState(false);
 
   const filteredAndSortedAccounts = mockAccounts
     .filter((account) => {
@@ -92,46 +93,54 @@ const Vault = () => {
           <h1 className="text-2xl font-bold">Your Financial Vault</h1>
           <div className="flex items-center gap-4">
             {hasAlerts && (
-              <Button variant="outline" size="icon" className="relative">
+              <Button variant="ghost" size="icon" className="relative">
                 <Bell className="h-4 w-4" />
                 <span className="absolute -top-1 -right-1 h-3 w-3 bg-destructive rounded-full" />
               </Button>
             )}
-            <Button className="gap-2">
-              <Plus className="h-4 w-4" />
-              Add Account
-            </Button>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <Input
-            placeholder="Search institutions..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <Select value={filterType} onValueChange={(value: AccountType | "all") => setFilterType(value)}>
-            <SelectTrigger>
-              <SelectValue placeholder="Filter by type" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Types</SelectItem>
-              <SelectItem value="savings">Savings</SelectItem>
-              <SelectItem value="checking">Checking</SelectItem>
-              <SelectItem value="investment">Investment</SelectItem>
-              <SelectItem value="credit">Credit</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select value={sortBy} onValueChange={(value: "balance" | "name" | "date") => setSortBy(value)}>
-            <SelectTrigger>
-              <SelectValue placeholder="Sort by" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="balance">Balance</SelectItem>
-              <SelectItem value="name">Institution Name</SelectItem>
-              <SelectItem value="date">Last Transaction</SelectItem>
-            </SelectContent>
-          </Select>
+        <div className="flex items-center gap-2 mb-6">
+          {showSearch ? (
+            <Input
+              placeholder="Search institutions..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="max-w-xs"
+            />
+          ) : null}
+          <div className="flex items-center gap-2 ml-auto">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setShowSearch(!showSearch)}
+            >
+              <Search className="h-4 w-4" />
+            </Button>
+            <Select value={filterType} onValueChange={(value: AccountType | "all") => setFilterType(value)}>
+              <SelectTrigger className="w-10 p-0 border-none">
+                <Filter className="h-4 w-4" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Types</SelectItem>
+                <SelectItem value="savings">Savings</SelectItem>
+                <SelectItem value="checking">Checking</SelectItem>
+                <SelectItem value="investment">Investment</SelectItem>
+                <SelectItem value="credit">Credit</SelectItem>
+              </SelectContent>
+            </Select>
+            <Select value={sortBy} onValueChange={(value: "balance" | "name" | "date") => setSortBy(value)}>
+              <SelectTrigger className="w-10 p-0 border-none">
+                <ArrowUpDown className="h-4 w-4" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="balance">Balance</SelectItem>
+                <SelectItem value="name">Institution Name</SelectItem>
+                <SelectItem value="date">Last Transaction</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -149,6 +158,16 @@ const Vault = () => {
             <p className="text-ninja-gray-600">No accounts found matching your criteria.</p>
           </div>
         )}
+
+        {/* Floating Add Account Button */}
+        <Button
+          className="fixed bottom-6 right-6 rounded-full shadow-lg"
+          size="lg"
+          onClick={() => navigate("/add-account")}
+        >
+          <Plus className="h-5 w-5 mr-2" />
+          Add Account
+        </Button>
       </main>
 
       <Footer />
