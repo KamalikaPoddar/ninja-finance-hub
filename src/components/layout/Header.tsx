@@ -10,10 +10,20 @@ import {
 import { useNavigate } from "react-router-dom";
 import { siteConfig } from "@/config/site";
 import { theme } from "@/config/theme";
+import { useAuth } from "@/hooks/useAuth";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+
+  const handleLogoClick = () => {
+    if (isAuthenticated) {
+      navigate('/vault');
+    } else {
+      navigate('/');
+    }
+  };
 
   const handleLogout = () => {
     // Add logout logic here
@@ -31,9 +41,13 @@ export const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           <a 
-            href="/" 
-            className="text-xl md:text-2xl font-bold"
+            href={isAuthenticated ? '/vault' : '/'}
+            className="text-xl md:text-2xl font-bold cursor-pointer"
             style={{ color: theme.colors.primary }}
+            onClick={(e) => {
+              e.preventDefault();
+              handleLogoClick();
+            }}
           >
             {siteConfig.header.brand}
           </a>

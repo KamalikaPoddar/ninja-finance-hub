@@ -11,6 +11,8 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { theme } from '@/config/theme';
+import FamilyTreeComponent from '@/components/family/FamilyTree';
+import { FamilyTree } from '@/types/family';
 
 const Vault = () => {
   const navigate = useNavigate();
@@ -47,6 +49,52 @@ const Vault = () => {
       hasNominee: true
     }
   ];
+
+  // Sample family data
+  const familyTree: FamilyTree = {
+    parents: [
+      {
+        id: '1',
+        name: 'John Doe Sr.',
+        relationship: 'parent',
+        isVerified: true
+      },
+      {
+        id: '2',
+        name: 'Jane Doe',
+        relationship: 'parent',
+        isVerified: true
+      }
+    ],
+    self: {
+      id: '3',
+      name: 'John Doe Jr.',
+      relationship: 'self',
+      isVerified: true
+    },
+    spouse: {
+      id: '4',
+      name: 'Mary Doe',
+      relationship: 'spouse',
+      isVerified: true
+    },
+    siblings: [
+      {
+        id: '5',
+        name: 'Alice Doe',
+        relationship: 'sibling',
+        isVerified: true
+      }
+    ],
+    children: [
+      {
+        id: '6',
+        name: 'Baby Doe',
+        relationship: 'child',
+        isVerified: true
+      }
+    ]
+  };
 
   const visibleAccounts = isExpanded ? accounts : [accounts[0]];
   const isFamilyVerified = accounts[0].isFamilyVerified;
@@ -136,9 +184,7 @@ const Vault = () => {
             className="p-6 rounded-lg" 
             style={{ backgroundColor: theme.colors.surface }}
           >
-            <p className="text-center" style={{ color: theme.colors.text.secondary }}>
-              Family tree functionality coming soon
-            </p>
+            <FamilyTreeComponent family={familyTree} />
           </div>
         </div>
 
