@@ -5,6 +5,7 @@ import Signup from '@/pages/Signup';
 import Vault from '@/pages/Vault';
 import ConsentPage from '@/pages/ConsentPage';
 import AccountDetail from '@/pages/AccountDetail';
+import AddAccount from '@/pages/AddAccount';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/vault" element={<Vault />} />
           <Route path="/consent" element={<ConsentPage />} />
           <Route path="/account/:accountId" element={<AccountDetail />} />
+          <Route path="/add-account" element={<AddAccount />} />
         </Routes>
       </BrowserRouter>
       <Toaster />

@@ -114,7 +114,7 @@ const Vault = () => {
                 backgroundColor: theme.colors.primary,
                 color: theme.colors.surface
               }}
-              onClick={() => navigate('/consent')}
+              onClick={() => navigate('/add-account')}
             >
               Add Account
             </Button>
