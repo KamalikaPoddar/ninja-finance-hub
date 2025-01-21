@@ -12,10 +12,16 @@ const AddAccount = () => {
   const [addTransactionHistory, setAddTransactionHistory] = useState(false);
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: theme.colors.background }}>
+    <div 
+      className="min-h-screen relative z-10" 
+      style={{ 
+        backgroundColor: theme.colors.background,
+        paddingTop: '80px' // Added to account for fixed header
+      }}
+    >
       <Header />
-      <div className="max-w-[1200px] mx-auto p-6 pt-24">
-        <div className="w-full min-h-screen bg-white rounded-lg shadow-sm flex flex-col">
+      <div className="max-w-[1200px] mx-auto p-6">
+        <div className="w-full min-h-[calc(100vh-80px)] bg-white rounded-lg shadow-sm flex flex-col">
           {/* Page Header */}
           <header className="w-full bg-white p-4 flex items-center justify-between shadow-sm rounded-t-lg">
             <div className="flex items-center gap-4">

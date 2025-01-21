@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 import { Header } from '@/components/layout/Header';
-import { ArrowLeft, AlertTriangle, User, FileSignature } from 'lucide-react';
+import { ArrowLeft, AlertTriangle, User, FileSignature, X } from 'lucide-react';
 import { theme } from '@/config/theme';
 import { Account } from '@/types/account';
 
@@ -96,14 +96,13 @@ const AccountDetail = () => {
       <Header />
       <div className="max-w-2xl mx-auto p-6 pt-24">
         <div className="flex items-center gap-4 mb-6">
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            onClick={() => navigate(-1)}
+          <button
+            onClick={() => navigate('/vault')}
+            className="p-2 rounded-full hover:bg-gray-100 transition-colors"
             style={{ color: theme.colors.text.primary }}
           >
-            <ArrowLeft className="h-5 w-5" />
-          </Button>
+            <X className="h-5 w-5" />
+          </button>
           <h1 
             className="text-2xl font-bold"
             style={{ color: theme.colors.text.primary }}
@@ -240,15 +239,15 @@ const AccountDetail = () => {
           </CardContent>
 
           <CardFooter className="flex justify-end">
-            <Button 
-              variant="destructive"
-              style={{ 
-                backgroundColor: theme.colors.error,
-                color: theme.colors.surface
+            <Button
+              variant="outline"
+              style={{
+                borderColor: theme.colors.primary,
+                color: theme.colors.primary
               }}
               onClick={handleRemoveAccount}
             >
-              Remove Account
+              Remove
             </Button>
           </CardFooter>
         </Card>
