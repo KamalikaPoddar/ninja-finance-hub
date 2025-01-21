@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Header } from '@/components/layout/Header';
 import { theme } from '@/config/theme';
 import { Button } from '@/components/ui/button';
-import { Search } from 'lucide-react';
+import { Search, X } from 'lucide-react';
+import { OrangeToggle } from '@/components/ui/toggle';
 
 const AddAccount = () => {
   const navigate = useNavigate();
@@ -17,12 +18,21 @@ const AddAccount = () => {
         <div className="w-full min-h-screen bg-white rounded-lg shadow-sm flex flex-col">
           {/* Page Header */}
           <header className="w-full bg-white p-4 flex items-center justify-between shadow-sm rounded-t-lg">
-            <h1 
-              className="text-3xl font-bold"
-              style={{ color: theme.colors.text.primary }}
-            >
-              Add a New Account
-            </h1>
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => navigate('/vault')}
+                className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                style={{ color: theme.colors.text.primary }}
+              >
+                <X className="h-5 w-5" />
+              </button>
+              <h1 
+                className="text-3xl font-bold"
+                style={{ color: theme.colors.text.primary }}
+              >
+                Add a New Account
+              </h1>
+            </div>
             <Button 
               variant="ghost"
               style={{ color: theme.colors.text.primary }}
@@ -42,32 +52,18 @@ const AddAccount = () => {
                 >
                   Institution Selection
                 </h2>
-                <label className="flex items-center gap-2">
+                <div className="flex items-center gap-2">
                   <span 
                     className="text-sm"
                     style={{ color: theme.colors.text.primary }}
                   >
                     ALL
                   </span>
-                  <input 
-                    type="checkbox" 
-                    className="hidden peer"
+                  <OrangeToggle
                     checked={showAllInstitutions}
                     onChange={(e) => setShowAllInstitutions(e.target.checked)}
                   />
-                  <div 
-                    className="w-[40px] h-[20px] rounded-full relative transition-all duration-300"
-                    style={{ 
-                      backgroundColor: showAllInstitutions 
-                        ? theme.colors.primary 
-                        : theme.colors.background
-                    }}
-                  >
-                    <div 
-                      className="w-[16px] h-[16px] bg-white rounded-full absolute top-1/2 left-[4px] peer-checked:left-[calc(100%-20px)] -translate-y-1/2 transition-all duration-300 shadow-sm"
-                    />
-                  </div>
-                </label>
+                </div>
               </div>
 
               {!showAllInstitutions && (
@@ -120,26 +116,10 @@ const AddAccount = () => {
                 >
                   Add Transaction History
                 </h2>
-                <label className="inline-flex items-center">
-                  <input 
-                    type="checkbox" 
-                    className="hidden peer"
-                    checked={addTransactionHistory}
-                    onChange={(e) => setAddTransactionHistory(e.target.checked)}
-                  />
-                  <div 
-                    className="w-[40px] h-[20px] rounded-full relative transition-all duration-300"
-                    style={{ 
-                      backgroundColor: addTransactionHistory 
-                        ? theme.colors.primary 
-                        : theme.colors.background
-                    }}
-                  >
-                    <div 
-                      className="w-[16px] h-[16px] bg-white rounded-full absolute top-1/2 left-[4px] peer-checked:left-[20px] -translate-y-1/2 transition-all duration-300 shadow-sm"
-                    />
-                  </div>
-                </label>
+                <OrangeToggle
+                  checked={addTransactionHistory}
+                  onChange={(e) => setAddTransactionHistory(e.target.checked)}
+                />
               </div>
               <p 
                 className="text-sm"
