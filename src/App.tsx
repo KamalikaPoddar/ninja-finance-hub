@@ -9,19 +9,17 @@ import AddAccount from '@/pages/AddAccount';
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/vault" element={<Vault />} />
-          <Route path="/consent" element={<ConsentPage />} />
-          <Route path="/account/:accountId" element={<AccountDetail />} />
-          <Route path="/add-account" element={<AddAccount />} />
-        </Routes>
-      </BrowserRouter>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/vault" element={<Vault />} />
+        <Route path="/consent" element={<ConsentPage />} />
+        <Route path="/account/:accountId" element={<AccountDetail />} />
+        <Route path="/add-account" element={<AddAccount />} />
+      </Routes>
       <Toaster />
-    </>
+    </BrowserRouter>
   );
 }
 

@@ -5,7 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-ninja-gray-100">
+    <div className="min-h-screen flex flex-col bg-background">
       <Header />
       <main className="flex-grow pt-16 md:pt-20">
         <Hero />
