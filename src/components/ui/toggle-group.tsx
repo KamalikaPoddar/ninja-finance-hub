@@ -12,13 +12,25 @@ const ToggleGroupContext = React.createContext<VariantProps<typeof toggleVariant
   variant: "default",
 })
 
-type ToggleGroupProps = React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> & {
-  className?: string
-  type: "single" | "multiple"
-  value?: string | string[]
-  defaultValue?: string | string[]
-  onValueChange?: (value: string | string[]) => void
+type ToggleGroupSingleProps = {
+  type: "single"
+  value?: string
+  defaultValue?: string
+  onValueChange?: (value: string) => void
 }
+
+type ToggleGroupMultipleProps = {
+  type: "multiple"
+  value?: string[]
+  defaultValue?: string[]
+  onValueChange?: (value: string[]) => void
+}
+
+type BaseToggleGroupProps = {
+  className?: string
+} & React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root>
+
+type ToggleGroupProps = (ToggleGroupSingleProps | ToggleGroupMultipleProps) & BaseToggleGroupProps
 
 const ToggleGroup = React.forwardRef<
   React.ElementRef<typeof ToggleGroupPrimitive.Root>,
