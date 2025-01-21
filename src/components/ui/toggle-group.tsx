@@ -18,19 +18,21 @@ type BaseToggleGroupProps = {
   children?: React.ReactNode
 }
 
-type ToggleGroupSingleProps = BaseToggleGroupProps & {
-  type?: "single"
-  value?: string
-  defaultValue?: string
-  onValueChange?: (value: string) => void
-}
+type ToggleGroupSingleProps = BaseToggleGroupProps & 
+  Omit<React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root>, keyof BaseToggleGroupProps> & {
+    type: "single"
+    value?: string
+    defaultValue?: string
+    onValueChange?: (value: string) => void
+  }
 
-type ToggleGroupMultipleProps = BaseToggleGroupProps & {
-  type: "multiple"
-  value?: string[]
-  defaultValue?: string[]
-  onValueChange?: (value: string[]) => void
-}
+type ToggleGroupMultipleProps = BaseToggleGroupProps & 
+  Omit<React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root>, keyof BaseToggleGroupProps> & {
+    type: "multiple"
+    value?: string[]
+    defaultValue?: string[]
+    onValueChange?: (value: string[]) => void
+  }
 
 type ToggleGroupProps = ToggleGroupSingleProps | ToggleGroupMultipleProps
 
