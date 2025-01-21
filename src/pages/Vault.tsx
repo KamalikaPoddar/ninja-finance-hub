@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import AccountCard from '@/components/vault/AccountCard';
-import { Header } from '@/components/layout/Header';
 import { Lock, ChevronDown, ChevronUp } from 'lucide-react';
 import {
   Tooltip,
@@ -12,14 +11,15 @@ import {
 } from '@/components/ui/tooltip';
 import { theme } from '@/config/theme';
 import FamilyTreeComponent from '@/components/family/FamilyTree';
-import { FamilyTree } from '@/types/family';
+import type { FamilyTree } from '@/types/family';
+import type { Account } from '@/types/account';
 
 const Vault = () => {
   const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
 
   // TODO: Fetch accounts from API
-  const accounts = [
+  const accounts: Account[] = [
     {
       id: '1',
       name: 'Bank One',
@@ -50,7 +50,6 @@ const Vault = () => {
     }
   ];
 
-  // Sample family data
   const familyTree: FamilyTree = {
     parents: [
       {
@@ -101,9 +100,8 @@ const Vault = () => {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: theme.colors.background }}>
-      <Header />
+      {/* Your Accounts Section */}
       <div className="max-w-4xl mx-auto p-6 pt-24">
-        {/* Your Accounts Section */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold" style={{ color: theme.colors.text.primary }}>
