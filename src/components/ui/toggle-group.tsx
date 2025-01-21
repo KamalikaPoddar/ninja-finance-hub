@@ -11,25 +11,14 @@ const ToggleGroupContext = React.createContext<
   variant: "default",
 })
 
-type ToggleGroupSingleProps = React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> &
-  VariantProps<typeof toggleVariants> & {
-    type: "single"
-  }
-
-type ToggleGroupMultipleProps = React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> &
-  VariantProps<typeof toggleVariants> & {
-    type: "multiple"
-  }
-
-type ToggleGroupProps = ToggleGroupSingleProps | ToggleGroupMultipleProps
-
 const ToggleGroup = React.forwardRef<
   React.ElementRef<typeof ToggleGroupPrimitive.Root>,
-  ToggleGroupProps
+  React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> &
+    VariantProps<typeof toggleVariants>
 >(({ className, variant, size, children, type, ...props }, ref) => (
   <ToggleGroupPrimitive.Root
     ref={ref}
-    type={type}
+    type={type as "single" | "multiple"}
     className={cn("flex items-center justify-center gap-1", className)}
     {...props}
   >
