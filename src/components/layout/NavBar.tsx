@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import Link from "next/link"
+import { Link } from "react-router-dom"
 import { LucideIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -46,7 +46,7 @@ export function NavBar({ items, className }: NavBarProps) {
           return (
             <Link
               key={item.name}
-              href={item.url}
+              to={item.url}
               onClick={() => setActiveTab(item.name)}
               className={cn(
                 "relative cursor-pointer text-sm font-semibold px-6 py-2 rounded-full transition-colors",
