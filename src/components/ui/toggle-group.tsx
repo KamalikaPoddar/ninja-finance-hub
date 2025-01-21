@@ -12,25 +12,26 @@ const ToggleGroupContext = React.createContext<VariantProps<typeof toggleVariant
   variant: "default",
 })
 
-type ToggleGroupSingleProps = {
+type BaseToggleGroupProps = {
+  className?: string
+}
+
+interface ToggleGroupSingleProps extends BaseToggleGroupProps {
   type: "single"
   value?: string
   defaultValue?: string
   onValueChange?: (value: string) => void
 }
 
-type ToggleGroupMultipleProps = {
+interface ToggleGroupMultipleProps extends BaseToggleGroupProps {
   type: "multiple"
   value?: string[]
   defaultValue?: string[]
   onValueChange?: (value: string[]) => void
 }
 
-type BaseToggleGroupProps = {
-  className?: string
-} & React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root>
-
-type ToggleGroupProps = (ToggleGroupSingleProps | ToggleGroupMultipleProps) & BaseToggleGroupProps
+type ToggleGroupProps = (ToggleGroupSingleProps | ToggleGroupMultipleProps) &
+  Omit<React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root>, keyof BaseToggleGroupProps>
 
 const ToggleGroup = React.forwardRef<
   React.ElementRef<typeof ToggleGroupPrimitive.Root>,
@@ -39,10 +40,7 @@ const ToggleGroup = React.forwardRef<
   <ToggleGroupPrimitive.Root
     ref={ref}
     type={type}
-    className={cn(
-      "flex items-center justify-center gap-1",
-      className
-    )}
+    className={cn("flex items-center justify-center gap-1", className)}
     {...props}
   >
     {children}
@@ -64,8 +62,11 @@ const ToggleGroupItem = React.forwardRef<
     <ToggleGroupPrimitive.Item
       ref={ref}
       className={cn(
-        "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=on]:bg-accent data-[state=on]:text-accent-foreground",
-        className
+        toggleVariants({
+          variant: context.variant,
+          size: context.size,
+          className,
+        }),
       )}
       {...props}
     >
