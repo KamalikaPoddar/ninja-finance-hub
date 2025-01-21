@@ -31,20 +31,18 @@ interface ToggleGroupMultipleProps extends BaseToggleGroupProps {
 }
 
 type ToggleGroupProps = (ToggleGroupSingleProps | ToggleGroupMultipleProps) &
-  Omit<React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root>, keyof BaseToggleGroupProps>
+  Omit<React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root>, keyof (ToggleGroupSingleProps | ToggleGroupMultipleProps)>
 
 const ToggleGroup = React.forwardRef<
   React.ElementRef<typeof ToggleGroupPrimitive.Root>,
   ToggleGroupProps
->(({ className, children, type, ...props }, ref) => (
+>(({ className, type, ...props }, ref) => (
   <ToggleGroupPrimitive.Root
     ref={ref}
     type={type}
     className={cn("flex items-center justify-center gap-1", className)}
     {...props}
-  >
-    {children}
-  </ToggleGroupPrimitive.Root>
+  />
 ))
 
 ToggleGroup.displayName = ToggleGroupPrimitive.Root.displayName
@@ -66,7 +64,7 @@ const ToggleGroupItem = React.forwardRef<
           variant: context.variant,
           size: context.size,
           className,
-        }),
+        })
       )}
       {...props}
     >
