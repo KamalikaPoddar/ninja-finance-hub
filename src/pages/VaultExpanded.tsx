@@ -11,7 +11,7 @@ export const VaultExpanded = () => {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: theme.colors.background }}> 
-      <div className="w-full md:w-[1200px] min-h-screen bg-white rounded-lg shadow-sm flex flex-col relative mx-auto">
+      <div className="w-full md:w-[1200px] min-h-[calc(100vh-4rem)] bg-white rounded-lg shadow-sm flex flex-col relative mx-auto">
         <header className="w-full bg-white p-4 flex items-center justify-between shadow-sm fixed top-0 z-10">
           <div className="flex items-center gap-4">
             <Button 
