@@ -24,12 +24,31 @@ const AccountCard = ({ account, onClick }: AccountCardProps) => {
       style={{ backgroundColor: theme.colors.surface }}
     >
       <CardHeader className="p-4">
-        <CardTitle 
-          className="text-lg"
-          style={{ color: theme.colors.text.primary }}
-        >
-          {account.name}
-        </CardTitle>
+        <div className="flex justify-between items-center">
+          <CardTitle 
+            className="text-lg"
+            style={{ color: theme.colors.text.primary }}
+          >
+            {account.name}
+          </CardTitle>
+          
+          {/* No Nominee button moved to top right */}
+          {!account.hasNominee && (
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="h-8 px-2"
+              style={{ 
+                borderColor: theme.colors.primary,
+                color: theme.colors.primary
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <UserX className="h-3 w-3 mr-1" />
+              <span className="text-xs">No Nominee</span>
+            </Button>
+          )}
+        </div>
       </CardHeader>
       
       <CardContent className="space-y-2 p-4 pt-0">
@@ -89,22 +108,6 @@ const AccountCard = ({ account, onClick }: AccountCardProps) => {
             >
               <AlertTriangle className="h-3 w-3 mr-1" />
               <span className="text-xs">Dormant</span>
-            </Button>
-          )}
-          
-          {!account.hasNominee && (
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="h-8 px-2"
-              style={{ 
-                borderColor: theme.colors.primary,
-                color: theme.colors.primary
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <UserX className="h-3 w-3 mr-1" />
-              <span className="text-xs">No Nominee</span>
             </Button>
           )}
         </div>
