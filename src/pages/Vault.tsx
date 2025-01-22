@@ -99,7 +99,6 @@ const Vault = () => {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: theme.colors.background }}>
-      <Header />
       <div className="max-w-4xl mx-auto p-6 pt-24">
         {/* Your Accounts Section */}
         <div className="mb-8">
