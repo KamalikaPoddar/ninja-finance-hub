@@ -1,12 +1,20 @@
 import { FamilyTree } from '@/types/family';
 import { Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 interface FamilyTreeProps {
   family: FamilyTree;
 }
 
 const FamilyTreeComponent = ({ family }: FamilyTreeProps) => {
+  const buttonStyles = (isVerified: boolean | undefined) => cn(
+    "relative flex items-center gap-2",
+    isVerified 
+      ? "bg-ninja-primary/5 hover:bg-ninja-primary/10 border-ninja-primary" 
+      : "hover:bg-accent hover:text-accent-foreground"
+  );
+
   return (
     <div className="space-y-8">
       {/* Parents Level */}
@@ -15,11 +23,7 @@ const FamilyTreeComponent = ({ family }: FamilyTreeProps) => {
           <div key={parent.id} className="relative">
             <Button
               variant="outline"
-              className={`relative flex items-center gap-2 ${
-                parent.isVerified 
-                  ? 'bg-ninja-primary/5 hover:bg-ninja-primary/10 border-ninja-primary' 
-                  : 'hover:bg-accent hover:text-accent-foreground'
-              }`}
+              className={buttonStyles(parent.isVerified)}
             >
               <span className="font-medium text-ninja-gray-900">{parent.name}</span>
               <span className="text-sm text-ninja-gray-600">Parent</span>
@@ -40,11 +44,7 @@ const FamilyTreeComponent = ({ family }: FamilyTreeProps) => {
           <div key={sibling.id} className="relative">
             <Button
               variant="outline"
-              className={`relative flex items-center gap-2 ${
-                sibling.isVerified 
-                  ? 'bg-ninja-primary/5 hover:bg-ninja-primary/10 border-ninja-primary' 
-                  : 'hover:bg-accent hover:text-accent-foreground'
-              }`}
+              className={buttonStyles(sibling.isVerified)}
             >
               <span className="font-medium text-ninja-gray-900">{sibling.name}</span>
               <span className="text-sm text-ninja-gray-600">Sibling</span>
@@ -61,11 +61,7 @@ const FamilyTreeComponent = ({ family }: FamilyTreeProps) => {
         <div className="relative">
           <Button
             variant="outline"
-            className={`relative flex items-center gap-2 ${
-              family.self.isVerified 
-                ? 'bg-ninja-primary/5 hover:bg-ninja-primary/10 border-ninja-primary' 
-                : 'hover:bg-accent hover:text-accent-foreground'
-            }`}
+            className={buttonStyles(family.self.isVerified)}
           >
             <span className="font-medium text-ninja-gray-900">{family.self.name}</span>
             <span className="text-sm text-ninja-gray-600">You</span>
@@ -82,11 +78,7 @@ const FamilyTreeComponent = ({ family }: FamilyTreeProps) => {
           <div className="relative">
             <Button
               variant="outline"
-              className={`relative flex items-center gap-2 ${
-                family.spouse.isVerified 
-                  ? 'bg-ninja-primary/5 hover:bg-ninja-primary/10 border-ninja-primary' 
-                  : 'hover:bg-accent hover:text-accent-foreground'
-              }`}
+              className={buttonStyles(family.spouse.isVerified)}
             >
               <span className="font-medium text-ninja-gray-900">{family.spouse.name}</span>
               <span className="text-sm text-ninja-gray-600">Spouse</span>
@@ -107,11 +99,7 @@ const FamilyTreeComponent = ({ family }: FamilyTreeProps) => {
             <div key={child.id} className="relative">
               <Button
                 variant="outline"
-                className={`relative flex items-center gap-2 ${
-                  child.isVerified 
-                    ? 'bg-ninja-primary/5 hover:bg-ninja-primary/10 border-ninja-primary' 
-                    : 'hover:bg-accent hover:text-accent-foreground'
-                }`}
+                className={buttonStyles(child.isVerified)}
               >
                 <span className="font-medium text-ninja-gray-900">{child.name}</span>
                 <span className="text-sm text-ninja-gray-600">Child</span>
