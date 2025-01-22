@@ -43,6 +43,7 @@ function App() {
             <Route path="/consent" element={<ConsentPage />} />
             <Route path="/account/:accountId" element={<AccountDetail />} />
             <Route path="/add-account" element={<AddAccount />} />
+            <Route path="/vault/expanded" element={<VaultExpanded />} />
           </Routes>
         </div>
         <Toaster />
