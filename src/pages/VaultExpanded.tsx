@@ -3,7 +3,6 @@ import { sampleAccounts } from '@/data/accounts';
 import AccountCard from '@/components/vault/AccountCard';
 import { ArrowLeft, Bell, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { theme } from '@/config/theme';
 
 export const VaultExpanded = () => {
   const navigate = useNavigate();
@@ -52,7 +51,7 @@ export const VaultExpanded = () => {
             className="flex flex-col items-center h-auto py-2"
             onClick={() => navigate('/')}
           >
-            <span className="material-symbols-outlined text-lg">home</span>
+            <Home className="h-4 w-4" />
             <span className="text-sm">Home</span>
           </Button>
           <Button 
@@ -60,7 +59,7 @@ export const VaultExpanded = () => {
             className="flex flex-col items-center h-auto py-2 text-primary"
             onClick={() => navigate('/vault')}
           >
-            <span className="material-symbols-outlined text-lg">lock</span>
+            <Lock className="h-4 w-4" />
             <span className="text-sm">Vault</span>
           </Button>
           <Button 
