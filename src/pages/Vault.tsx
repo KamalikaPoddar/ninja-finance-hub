@@ -68,8 +68,8 @@ const Vault = () => {
   const isFamilyVerified = accounts[0].isFamilyVerified;
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: theme.colors.background }}>
-      <div className="max-w-4xl mx-auto p-6 pt-24">
+    <div className="min-h-[calc(100vh-4rem)]" style={{ backgroundColor: theme.colors.background }}>
+      <div className="max-w-4xl mx-auto p-6 pt-24 pb-24">
         {/* Your Accounts Section */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-6">
