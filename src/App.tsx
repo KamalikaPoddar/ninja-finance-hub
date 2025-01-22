@@ -8,6 +8,7 @@ import Vault from '@/pages/Vault';
 import ConsentPage from '@/pages/ConsentPage';
 import AccountDetail from '@/pages/AccountDetail';
 import AddAccount from '@/pages/AddAccount';
+import { VaultExpanded } from '@/pages/VaultExpanded';
 import { Home, Lock, User } from 'lucide-react';
 
 const navItems = [

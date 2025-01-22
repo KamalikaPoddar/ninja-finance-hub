@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { sampleAccounts } from '@/data/accounts';
 import AccountCard from '@/components/vault/AccountCard';
 import { Lock, ChevronDown, ChevronUp } from 'lucide-react';
 import {
@@ -16,38 +17,7 @@ import type { Account } from '@/types/account';
 
 const Vault = () => {
   const navigate = useNavigate();
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const accounts: Account[] = [
-    {
-      id: '1',
-      name: 'Bank One',
-      balance: 10000,
-      lastTransactionDate: '2025-01-15',
-      isConnected: true,
-      isDormant: false,
-      hasNominee: true,
-      isFamilyVerified: false
-    },
-    {
-      id: '2',
-      name: 'Bank Two',
-      balance: 25000,
-      lastTransactionDate: '2024-12-20',
-      isConnected: false,
-      isDormant: true,
-      hasNominee: false
-    },
-    {
-      id: '3',
-      name: 'Bank Three',
-      balance: 15000,
-      lastTransactionDate: '2025-01-10',
-      isConnected: true,
-      isDormant: false,
-      hasNominee: true
-    }
-  ];
+  const accounts = sampleAccounts;
 
   const familyTree: FamilyTree = {
     parents: [
@@ -94,7 +64,7 @@ const Vault = () => {
     ]
   };
 
-  const visibleAccounts = isExpanded ? accounts : [accounts[0]];
+  const visibleAccounts = accounts.slice(0, 1);
   const isFamilyVerified = accounts[0].isFamilyVerified;
 
   return (
@@ -128,33 +98,18 @@ const Vault = () => {
           </div>
 
           <div className="mt-4 flex justify-center">
-            {!isExpanded ? (
-              <Button
-                variant="outline"
-                className="gap-2"
-                style={{
-                  borderColor: theme.colors.primary,
-                  color: theme.colors.primary
-                }}
-                onClick={() => setIsExpanded(true)}
-              >
-                <ChevronDown className="h-4 w-4" />
-                View all {accounts.length} accounts
-              </Button>
-            ) : (
-              <Button
-                variant="outline"
-                className="gap-2"
-                style={{
-                  borderColor: theme.colors.primary,
-                  color: theme.colors.primary
-                }}
-                onClick={() => setIsExpanded(false)}
-              >
-                <ChevronUp className="h-4 w-4" />
-                Collapse
-              </Button>
-            )}
+            <Button
+              variant="outline"
+              className="gap-2"
+              style={{
+                borderColor: theme.colors.primary,
+                color: theme.colors.primary
+              }}
+              onClick={() => navigate('/vault/expanded')}
+            >
+              <ChevronDown className="h-4 w-4" />
+              View all {accounts.length} accounts
+            </Button>
           </div>
         </div>
 
