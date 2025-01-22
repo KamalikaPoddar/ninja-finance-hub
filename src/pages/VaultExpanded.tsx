@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { sampleAccounts } from '@/data/accounts';
 import AccountCard from '@/components/vault/AccountCard';
-import { ArrowLeft, Bell, User } from 'lucide-react';
+import { ArrowLeft, Bell, User, Home, Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export const VaultExpanded = () => {
@@ -66,14 +66,12 @@ export const VaultExpanded = () => {
             variant="ghost" 
             className="flex flex-col items-center h-auto py-2"
           >
-            <span className="material-symbols-outlined text-lg">explore</span>
             <span className="text-sm">Discover</span>
           </Button>
           <Button 
             variant="ghost" 
             className="flex flex-col items-center h-auto py-2"
           >
-            <span className="material-symbols-outlined text-lg">track_changes</span>
             <span className="text-sm">Track</span>
           </Button>
         </nav>
