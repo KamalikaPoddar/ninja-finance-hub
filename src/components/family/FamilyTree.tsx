@@ -1,5 +1,4 @@
 import { FamilyTree } from '@/types/family';
-import { theme } from '@/config/theme';
 import { Check } from 'lucide-react';
 
 interface FamilyTreeProps {
@@ -14,11 +13,11 @@ const FamilyTreeComponent = ({ family }: FamilyTreeProps) => {
         {family.parents.map(parent => (
           <div key={parent.id} className="relative">
             <div 
-              className={`p-4 rounded-md text-center border ${
+              className={`inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-ninja-primary px-4 py-2 ${
                 parent.isVerified 
-                  ? 'border-ninja-primary bg-ninja-primary/5' 
-                  : 'border-ninja-primary/50'
-              } hover:shadow-sm transition-shadow`}
+                  ? 'bg-ninja-primary/5 hover:bg-ninja-primary/10' 
+                  : 'hover:bg-accent hover:text-accent-foreground'
+              }`}
             >
               <h3 className="font-medium text-ninja-gray-900">{parent.name}</h3>
               <p className="text-sm text-ninja-gray-600">Parent</p>
@@ -38,11 +37,11 @@ const FamilyTreeComponent = ({ family }: FamilyTreeProps) => {
         {family.siblings.map(sibling => (
           <div key={sibling.id} className="relative">
             <div 
-              className={`p-4 rounded-md text-center border ${
+              className={`inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-ninja-primary px-4 py-2 ${
                 sibling.isVerified 
-                  ? 'border-ninja-primary bg-ninja-primary/5' 
-                  : 'border-ninja-primary/50'
-              } hover:shadow-sm transition-shadow`}
+                  ? 'bg-ninja-primary/5 hover:bg-ninja-primary/10' 
+                  : 'hover:bg-accent hover:text-accent-foreground'
+              }`}
             >
               <h3 className="font-medium text-ninja-gray-900">{sibling.name}</h3>
               <p className="text-sm text-ninja-gray-600">Sibling</p>
@@ -58,11 +57,11 @@ const FamilyTreeComponent = ({ family }: FamilyTreeProps) => {
         {/* Self */}
         <div className="relative">
           <div 
-            className={`p-4 rounded-md text-center border ${
+            className={`inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-ninja-primary px-4 py-2 ${
               family.self.isVerified 
-                ? 'border-ninja-primary bg-ninja-primary/5' 
-                : 'border-ninja-primary/50'
-            } hover:shadow-sm transition-shadow`}
+                ? 'bg-ninja-primary/5 hover:bg-ninja-primary/10' 
+                : 'hover:bg-accent hover:text-accent-foreground'
+            }`}
           >
             <h3 className="font-medium text-ninja-gray-900">{family.self.name}</h3>
             <p className="text-sm text-ninja-gray-600">You</p>
@@ -78,11 +77,11 @@ const FamilyTreeComponent = ({ family }: FamilyTreeProps) => {
         {family.spouse && (
           <div className="relative">
             <div 
-              className={`p-4 rounded-md text-center border ${
+              className={`inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-ninja-primary px-4 py-2 ${
                 family.spouse.isVerified 
-                  ? 'border-ninja-primary bg-ninja-primary/5' 
-                  : 'border-ninja-primary/50'
-              } hover:shadow-sm transition-shadow`}
+                  ? 'bg-ninja-primary/5 hover:bg-ninja-primary/10' 
+                  : 'hover:bg-accent hover:text-accent-foreground'
+              }`}
             >
               <h3 className="font-medium text-ninja-gray-900">{family.spouse.name}</h3>
               <p className="text-sm text-ninja-gray-600">Spouse</p>
@@ -102,11 +101,11 @@ const FamilyTreeComponent = ({ family }: FamilyTreeProps) => {
           {family.children.map(child => (
             <div key={child.id} className="relative">
               <div 
-                className={`p-4 rounded-md text-center border ${
+                className={`inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-ninja-primary px-4 py-2 ${
                   child.isVerified 
-                    ? 'border-ninja-primary bg-ninja-primary/5' 
-                    : 'border-ninja-primary/50'
-                } hover:shadow-sm transition-shadow`}
+                    ? 'bg-ninja-primary/5 hover:bg-ninja-primary/10' 
+                    : 'hover:bg-accent hover:text-accent-foreground'
+                }`}
               >
                 <h3 className="font-medium text-ninja-gray-900">{child.name}</h3>
                 <p className="text-sm text-ninja-gray-600">Child</p>
