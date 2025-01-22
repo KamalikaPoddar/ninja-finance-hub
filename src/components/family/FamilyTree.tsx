@@ -1,5 +1,6 @@
 import { FamilyTree } from '@/types/family';
 import { Check } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface FamilyTreeProps {
   family: FamilyTree;
@@ -12,21 +13,22 @@ const FamilyTreeComponent = ({ family }: FamilyTreeProps) => {
       <div className="flex justify-center space-x-8">
         {family.parents.map(parent => (
           <div key={parent.id} className="relative">
-            <div 
-              className={`inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-ninja-primary px-4 py-2 ${
+            <Button
+              variant="outline"
+              className={`relative flex items-center gap-2 ${
                 parent.isVerified 
-                  ? 'bg-ninja-primary/5 hover:bg-ninja-primary/10' 
+                  ? 'bg-ninja-primary/5 hover:bg-ninja-primary/10 border-ninja-primary' 
                   : 'hover:bg-accent hover:text-accent-foreground'
               }`}
             >
-              <h3 className="font-medium text-ninja-gray-900">{parent.name}</h3>
-              <p className="text-sm text-ninja-gray-600">Parent</p>
+              <span className="font-medium text-ninja-gray-900">{parent.name}</span>
+              <span className="text-sm text-ninja-gray-600">Parent</span>
               {parent.isVerified && (
                 <Check 
                   className="h-4 w-4 absolute -top-2 -right-2 bg-ninja-primary text-white rounded-full p-0.5" 
                 />
               )}
-            </div>
+            </Button>
           </div>
         ))}
       </div>
@@ -36,61 +38,64 @@ const FamilyTreeComponent = ({ family }: FamilyTreeProps) => {
         {/* Siblings */}
         {family.siblings.map(sibling => (
           <div key={sibling.id} className="relative">
-            <div 
-              className={`inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-ninja-primary px-4 py-2 ${
+            <Button
+              variant="outline"
+              className={`relative flex items-center gap-2 ${
                 sibling.isVerified 
-                  ? 'bg-ninja-primary/5 hover:bg-ninja-primary/10' 
+                  ? 'bg-ninja-primary/5 hover:bg-ninja-primary/10 border-ninja-primary' 
                   : 'hover:bg-accent hover:text-accent-foreground'
               }`}
             >
-              <h3 className="font-medium text-ninja-gray-900">{sibling.name}</h3>
-              <p className="text-sm text-ninja-gray-600">Sibling</p>
+              <span className="font-medium text-ninja-gray-900">{sibling.name}</span>
+              <span className="text-sm text-ninja-gray-600">Sibling</span>
               {sibling.isVerified && (
                 <Check 
                   className="h-4 w-4 absolute -top-2 -right-2 bg-ninja-primary text-white rounded-full p-0.5" 
                 />
               )}
-            </div>
+            </Button>
           </div>
         ))}
 
         {/* Self */}
         <div className="relative">
-          <div 
-            className={`inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-ninja-primary px-4 py-2 ${
+          <Button
+            variant="outline"
+            className={`relative flex items-center gap-2 ${
               family.self.isVerified 
-                ? 'bg-ninja-primary/5 hover:bg-ninja-primary/10' 
+                ? 'bg-ninja-primary/5 hover:bg-ninja-primary/10 border-ninja-primary' 
                 : 'hover:bg-accent hover:text-accent-foreground'
             }`}
           >
-            <h3 className="font-medium text-ninja-gray-900">{family.self.name}</h3>
-            <p className="text-sm text-ninja-gray-600">You</p>
+            <span className="font-medium text-ninja-gray-900">{family.self.name}</span>
+            <span className="text-sm text-ninja-gray-600">You</span>
             {family.self.isVerified && (
               <Check 
                 className="h-4 w-4 absolute -top-2 -right-2 bg-ninja-primary text-white rounded-full p-0.5" 
               />
             )}
-          </div>
+          </Button>
         </div>
 
         {/* Spouse */}
         {family.spouse && (
           <div className="relative">
-            <div 
-              className={`inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-ninja-primary px-4 py-2 ${
+            <Button
+              variant="outline"
+              className={`relative flex items-center gap-2 ${
                 family.spouse.isVerified 
-                  ? 'bg-ninja-primary/5 hover:bg-ninja-primary/10' 
+                  ? 'bg-ninja-primary/5 hover:bg-ninja-primary/10 border-ninja-primary' 
                   : 'hover:bg-accent hover:text-accent-foreground'
               }`}
             >
-              <h3 className="font-medium text-ninja-gray-900">{family.spouse.name}</h3>
-              <p className="text-sm text-ninja-gray-600">Spouse</p>
+              <span className="font-medium text-ninja-gray-900">{family.spouse.name}</span>
+              <span className="text-sm text-ninja-gray-600">Spouse</span>
               {family.spouse.isVerified && (
                 <Check 
                   className="h-4 w-4 absolute -top-2 -right-2 bg-ninja-primary text-white rounded-full p-0.5" 
                 />
               )}
-            </div>
+            </Button>
           </div>
         )}
       </div>
@@ -100,21 +105,22 @@ const FamilyTreeComponent = ({ family }: FamilyTreeProps) => {
         <div className="flex justify-center space-x-8">
           {family.children.map(child => (
             <div key={child.id} className="relative">
-              <div 
-                className={`inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-ninja-primary px-4 py-2 ${
+              <Button
+                variant="outline"
+                className={`relative flex items-center gap-2 ${
                   child.isVerified 
-                    ? 'bg-ninja-primary/5 hover:bg-ninja-primary/10' 
+                    ? 'bg-ninja-primary/5 hover:bg-ninja-primary/10 border-ninja-primary' 
                     : 'hover:bg-accent hover:text-accent-foreground'
                 }`}
               >
-                <h3 className="font-medium text-ninja-gray-900">{child.name}</h3>
-                <p className="text-sm text-ninja-gray-600">Child</p>
+                <span className="font-medium text-ninja-gray-900">{child.name}</span>
+                <span className="text-sm text-ninja-gray-600">Child</span>
                 {child.isVerified && (
                   <Check 
                     className="h-4 w-4 absolute -top-2 -right-2 bg-ninja-primary text-white rounded-full p-0.5" 
                   />
                 )}
-              </div>
+              </Button>
             </div>
           ))}
         </div>
