@@ -34,7 +34,7 @@ export const VaultExpanded = () => {
           </div>
         </header>
       
-        <div className="p-6 flex flex-col gap-8 mt-16">
+        <div className="p-6 flex flex-col gap-8 mt-16 overflow-y-auto pb-20">
           <section className="flex flex-col gap-4">
             {accounts.map((account) => (
               <AccountCard
