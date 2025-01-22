@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import AccountCard from '@/components/vault/AccountCard';
-import { Header } from '@/components/layout/Header';
 import { Lock, ChevronDown, ChevronUp } from 'lucide-react';
 import {
   Tooltip,
@@ -19,7 +18,6 @@ const Vault = () => {
   const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // TODO: Fetch accounts from API
   const accounts: Account[] = [
     {
       id: '1',
