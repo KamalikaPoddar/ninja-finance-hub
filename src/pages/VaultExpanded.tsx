@@ -3,13 +3,14 @@ import { sampleAccounts } from '@/data/accounts';
 import AccountCard from '@/components/vault/AccountCard';
 import { ArrowLeft, Bell, User, Home, Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { theme } from '@/config/theme';
 
 export const VaultExpanded = () => {
   const navigate = useNavigate();
   const accounts = sampleAccounts;
 
   return (
-    <div className="min-h-screen bg-background"> 
+    <div className="min-h-screen" style={{ backgroundColor: theme.colors.background }}> 
       <div className="w-full md:w-[1200px] min-h-screen bg-white rounded-lg shadow-sm flex flex-col relative mx-auto">
         <header className="w-full bg-white p-4 flex items-center justify-between shadow-sm fixed top-0 z-10">
           <div className="flex items-center gap-4">
