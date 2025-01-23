@@ -12,8 +12,10 @@ import { useToast } from "@/hooks/use-toast";
 type FamilyMemberFormData = {
   relationship: "parent" | "spouse" | "sibling" | "child";
   name: string;
+  gender: "male" | "female" | "other";
   dateOfBirth: string;
   certificateNumber?: string;
+  certificateFile?: File;
   consentGiven: boolean;
 };
 
@@ -21,14 +23,16 @@ const AddFamilyMember = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [currentStep, setCurrentStep] = useState(1);
-  const totalSteps = 3;
+  const totalSteps = 4;
 
   const form = useForm<FamilyMemberFormData>({
     defaultValues: {
       relationship: "parent",
       name: "",
+      gender: "male",
       dateOfBirth: "",
       certificateNumber: "",
+      certificateFile: undefined,
       consentGiven: false,
     },
   });
@@ -68,7 +72,8 @@ const AddFamilyMember = () => {
             <p className="text-sm md:text-base text-ninja-gray-600">
               Step {currentStep} of {totalSteps}: {
                 currentStep === 1 ? "Basic Information" :
-                currentStep === 2 ? "Additional Details" :
+                currentStep === 2 ? "Date of Birth" :
+                currentStep === 3 ? "Certificate Details" :
                 "Consent & Review"
               }
             </p>
@@ -138,25 +143,65 @@ const AddFamilyMember = () => {
                       </FormItem>
                     )}
                   />
-                </>
-              )}
 
-              {currentStep === 2 && (
-                <>
                   <FormField
                     control={form.control}
-                    name="dateOfBirth"
+                    name="gender"
                     render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Date of Birth</FormLabel>
+                      <FormItem className="space-y-3">
+                        <FormLabel>Gender</FormLabel>
                         <FormControl>
-                          <Input type="date" {...field} />
+                          <RadioGroup
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                            className="grid grid-cols-3 gap-4"
+                          >
+                            {[
+                              { value: "male", label: "Male" },
+                              { value: "female", label: "Female" },
+                              { value: "other", label: "Other" },
+                            ].map(({ value, label }) => (
+                              <FormItem key={value}>
+                                <FormControl>
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value={value} id={value} />
+                                    <FormLabel htmlFor={value} className="cursor-pointer">
+                                      {label}
+                                    </FormLabel>
+                                  </div>
+                                </FormControl>
+                              </FormItem>
+                            ))}
+                          </RadioGroup>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
+                </>
+              )}
 
+              {currentStep === 2 && (
+                <FormField
+                  control={form.control}
+                  name="dateOfBirth"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Date of Birth</FormLabel>
+                      <FormControl>
+                        <Input type="date" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {currentStep === 3 && (
+                <>
+                  <div className="text-sm text-ninja-gray-600 mb-4">
+                    This step is optional. You can skip it if you don't have certificate details.
+                  </div>
                   <FormField
                     control={form.control}
                     name="certificateNumber"
@@ -176,10 +221,33 @@ const AddFamilyMember = () => {
                       </FormItem>
                     )}
                   />
+
+                  <FormField
+                    control={form.control}
+                    name="certificateFile"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>
+                          <span className="flex items-center gap-2">
+                            Upload Certificate
+                            <span className="text-sm text-ninja-gray-600">(Optional)</span>
+                          </span>
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            type="file"
+                            accept=".pdf,.png,.jpg,.jpeg"
+                            onChange={(e) => field.onChange(e.target.files?.[0])}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </>
               )}
 
-              {currentStep === 3 && (
+              {currentStep === 4 && (
                 <FormField
                   control={form.control}
                   name="consentGiven"
