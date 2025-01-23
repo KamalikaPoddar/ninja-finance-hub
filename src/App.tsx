@@ -10,6 +10,7 @@ import AccountDetail from '@/pages/AccountDetail';
 import AddAccount from '@/pages/AddAccount';
 import { VaultExpanded } from '@/pages/VaultExpanded';
 import FamilyTreePage from '@/pages/FamilyTree';
+import AddFamilyMember from '@/pages/AddFamilyMember';
 import { Home, Lock, User, Users } from 'lucide-react';
 
 const navItems = [
@@ -51,6 +52,7 @@ function App() {
             <Route path="/add-account" element={<AddAccount />} />
             <Route path="/vault/expanded" element={<VaultExpanded />} />
             <Route path="/family-tree" element={<FamilyTreePage />} />
+            <Route path="/family-tree/add" element={<AddFamilyMember />} />
           </Routes>
         </div>
         <Toaster />
