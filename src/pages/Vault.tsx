@@ -13,59 +13,29 @@ import {
 import { theme } from '@/config/theme';
 import FamilyTreeComponent from '@/components/family/FamilyTree';
 import type { FamilyTree } from '@/types/family';
-import type { Account } from '@/types/account';
 
+// Note: This file is getting quite long and should be refactored into smaller components
 const Vault = () => {
   const navigate = useNavigate();
   const accounts = sampleAccounts;
-
-  const familyTree: FamilyTree = {
-    parents: [
-      {
-        id: '1',
-        name: 'John Doe Sr.',
-        relationship: 'parent',
-        isVerified: true
-      },
-      {
-        id: '2',
-        name: 'Jane Doe',
-        relationship: 'parent',
-        isVerified: true
-      }
-    ],
-    self: {
-      id: '3',
-      name: 'John Doe Jr.',
-      relationship: 'self',
-      isVerified: true
-    },
-    spouse: {
-      id: '4',
-      name: 'Mary Doe',
-      relationship: 'spouse',
-      isVerified: true
-    },
-    siblings: [
-      {
-        id: '5',
-        name: 'Alice Doe',
-        relationship: 'sibling',
-        isVerified: true
-      }
-    ],
-    children: [
-      {
-        id: '6',
-        name: 'Baby Doe',
-        relationship: 'child',
-        isVerified: true
-      }
-    ]
-  };
-
   const visibleAccounts = accounts.slice(0, 1);
   const isFamilyVerified = accounts[0].isFamilyVerified;
+
+  // Using the same family data structure as in FamilyTree page
+  const [familyData] = useState<FamilyTree>({
+    parents: [
+      { id: '1', name: 'John Doe', relationship: 'parent', isVerified: true },
+      { id: '2', name: 'Jane Doe', relationship: 'parent', isVerified: false }
+    ],
+    self: { id: '3', name: 'You', relationship: 'self', isVerified: true },
+    siblings: [
+      { id: '4', name: 'Jack Doe', relationship: 'sibling', isVerified: false }
+    ],
+    spouse: { id: '5', name: 'Sarah Doe', relationship: 'spouse', isVerified: true },
+    children: [
+      { id: '6', name: 'Jimmy Doe', relationship: 'child', isVerified: false }
+    ]
+  });
 
   return (
     <div className="min-h-[calc(100vh-4rem)]" style={{ backgroundColor: theme.colors.background }}>
@@ -124,9 +94,7 @@ const Vault = () => {
                 backgroundColor: theme.colors.primary,
                 color: theme.colors.surface
               }}
-              onClick={() => {
-                // TODO: Implement family management navigation
-              }}
+              onClick={() => navigate('/family-tree')}
             >
               Manage Family
             </Button>
@@ -136,7 +104,7 @@ const Vault = () => {
             className="p-6 rounded-lg" 
             style={{ backgroundColor: theme.colors.surface }}
           >
-            <FamilyTreeComponent family={familyTree} />
+            <FamilyTreeComponent family={familyData} />
           </div>
         </div>
 

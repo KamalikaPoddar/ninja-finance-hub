@@ -29,10 +29,20 @@ const FamilyTreePage = () => {
   return (
     <div className="min-h-screen bg-background py-20 px-4">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-ninja-gray-900 mb-2">Family Tree</h1>
-        <p className="text-ninja-gray-600 mb-8">
-          Secure your future by getting your family details in one place
-        </p>
+        <div className="flex justify-between items-center mb-8">
+          <div>
+            <h1 className="text-3xl font-bold text-ninja-gray-900 mb-2">Family Tree</h1>
+            <p className="text-ninja-gray-600">
+              Secure your future by getting your family details in one place
+            </p>
+          </div>
+          <Button 
+            onClick={handleStartBuilding}
+            className="bg-ninja-primary text-white hover:bg-ninja-primary/90"
+          >
+            Add Family Member
+          </Button>
+        </div>
         
         {Object.keys(familyData).length > 0 ? (
           <FamilyTreeComponent family={familyData} />
