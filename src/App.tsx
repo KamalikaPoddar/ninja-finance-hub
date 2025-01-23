@@ -9,7 +9,8 @@ import ConsentPage from '@/pages/ConsentPage';
 import AccountDetail from '@/pages/AccountDetail';
 import AddAccount from '@/pages/AddAccount';
 import { VaultExpanded } from '@/pages/VaultExpanded';
-import { Home, Lock, User } from 'lucide-react';
+import FamilyTreePage from '@/pages/FamilyTree';
+import { Home, Lock, User, Users } from 'lucide-react';
 
 const navItems = [
   {
@@ -26,6 +27,11 @@ const navItems = [
     name: 'Accounts',
     url: '/account',
     icon: User
+  },
+  {
+    name: 'Family Tree',
+    url: '/family-tree',
+    icon: Users
   }
 ];
 
@@ -44,6 +50,7 @@ function App() {
             <Route path="/account/:accountId" element={<AccountDetail />} />
             <Route path="/add-account" element={<AddAccount />} />
             <Route path="/vault/expanded" element={<VaultExpanded />} />
+            <Route path="/family-tree" element={<FamilyTreePage />} />
           </Routes>
         </div>
         <Toaster />
