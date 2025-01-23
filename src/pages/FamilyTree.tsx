@@ -7,7 +7,21 @@ import type { FamilyTree } from "@/types/family";
 
 const FamilyTreePage = () => {
   const navigate = useNavigate();
-  const [familyData] = useState<FamilyTree | null>(null);
+  // Initialize with mock data for testing
+  const [familyData] = useState<FamilyTree>({
+    parents: [
+      { id: '1', name: 'John Doe', relationship: 'parent', isVerified: true },
+      { id: '2', name: 'Jane Doe', relationship: 'parent', isVerified: false }
+    ],
+    self: { id: '3', name: 'You', relationship: 'self', isVerified: true },
+    siblings: [
+      { id: '4', name: 'Jack Doe', relationship: 'sibling', isVerified: false }
+    ],
+    spouse: { id: '5', name: 'Sarah Doe', relationship: 'spouse', isVerified: true },
+    children: [
+      { id: '6', name: 'Jimmy Doe', relationship: 'child', isVerified: false }
+    ]
+  });
 
   const handleStartBuilding = () => {
     navigate("/family-tree/add");
