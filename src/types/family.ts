@@ -4,7 +4,6 @@ export interface FamilyMember {
   relationship: 'parent' | 'self' | 'spouse' | 'sibling' | 'child';
   dateOfBirth?: string;
   isVerified?: boolean;
-  children?: FamilyMember[];
 }
 
 export interface FamilyTree {
