@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Users } from "lucide-react";
+import { UserPlus } from "lucide-react";
 
 interface EmptyStateProps {
   onStart: () => void;
@@ -7,25 +7,30 @@ interface EmptyStateProps {
 
 export const EmptyState = ({ onStart }: EmptyStateProps) => {
   return (
-    <div className="flex flex-col items-center justify-center p-8 bg-white rounded-lg border border-ninja-gray-200">
-      <div className="w-16 h-16 bg-ninja-primary/10 rounded-full flex items-center justify-center mb-6">
-        <Users className="w-8 h-8 text-ninja-primary" />
+    <div className="flex flex-col items-center justify-center p-8 text-center bg-white rounded-lg border border-ninja-gray-200 shadow-sm">
+      <div className="w-16 h-16 mb-6 rounded-full bg-ninja-primary/10 flex items-center justify-center">
+        <UserPlus className="w-8 h-8 text-ninja-primary" />
       </div>
       
-      <h2 className="text-xl font-semibold text-ninja-gray-900 mb-2">
+      <h2 className="text-2xl font-semibold text-ninja-gray-900 mb-3">
         Start Building Your Family Tree
       </h2>
       
-      <p className="text-ninja-gray-600 text-center max-w-md mb-6">
-        Your data will remain private and is used only to verify relationships. We'll guide you through each step of the process.
+      <p className="text-ninja-gray-600 mb-8 max-w-md">
+        Let's secure your future by getting your family details in one place. Your data will remain private and is used only to verify relationships.
       </p>
       
       <Button 
         onClick={onStart}
-        className="bg-ninja-primary hover:bg-ninja-primary/90"
+        className="flex items-center gap-2"
       >
+        <UserPlus className="w-4 h-4" />
         Start Now
       </Button>
+      
+      <p className="mt-4 text-sm text-ninja-gray-500">
+        Your data is protected and encrypted
+      </p>
     </div>
   );
 };
