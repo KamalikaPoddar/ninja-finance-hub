@@ -11,6 +11,8 @@ import AddAccount from '@/pages/AddAccount';
 import { VaultExpanded } from '@/pages/VaultExpanded';
 import FamilyTreePage from '@/pages/FamilyTree';
 import AddFamilyMember from '@/pages/AddFamilyMember';
+import FamilyVerification from '@/pages/FamilyVerification';
+import VerifyRelationship from '@/pages/VerifyRelationship';
 import { Home, Lock, User, Users } from 'lucide-react';
 
 const navItems = [
@@ -53,6 +55,8 @@ function App() {
             <Route path="/vault/expanded" element={<VaultExpanded />} />
             <Route path="/family-tree" element={<FamilyTreePage />} />
             <Route path="/family-tree/add" element={<AddFamilyMember />} />
+            <Route path="/family-tree/verify" element={<FamilyVerification />} />
+            <Route path="/verify" element={<VerifyRelationship />} />
           </Routes>
         </div>
         <Toaster />
