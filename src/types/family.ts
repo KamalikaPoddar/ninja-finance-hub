@@ -1,9 +1,12 @@
+export type RelationType = 'parent' | 'self' | 'spouse' | 'sibling' | 'child';
+
 export interface FamilyMember {
   id: string;
   name: string;
-  relationship: 'parent' | 'self' | 'spouse' | 'sibling' | 'child';
-  dateOfBirth?: string;
+  relationship: RelationType;
   isVerified?: boolean;
+  dateOfBirth?: string;
+  email?: string;
 }
 
 export interface FamilyTree {

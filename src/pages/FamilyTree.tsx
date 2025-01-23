@@ -7,7 +7,6 @@ import type { FamilyTree } from "@/types/family";
 
 const FamilyTreePage = () => {
   const navigate = useNavigate();
-  // Initialize with mock data for testing
   const [familyData] = useState<FamilyTree>({
     parents: [
       { id: '1', name: 'John Doe', relationship: 'parent', isVerified: true },
@@ -35,7 +34,7 @@ const FamilyTreePage = () => {
           Secure your future by getting your family details in one place
         </p>
         
-        {familyData ? (
+        {Object.keys(familyData).length > 0 ? (
           <FamilyTreeComponent family={familyData} />
         ) : (
           <EmptyState onStart={handleStartBuilding} />

@@ -9,7 +9,7 @@ interface FamilyTreeProps {
 
 const FamilyTreeComponent = ({ family }: FamilyTreeProps) => {
   const buttonStyles = (isVerified: boolean | undefined) => cn(
-    "relative flex items-center gap-2",
+    "relative flex items-center gap-2 min-w-[150px]",
     isVerified 
       ? "bg-ninja-primary/5 hover:bg-ninja-primary/10 border-ninja-primary" 
       : "hover:bg-accent hover:text-accent-foreground"
@@ -18,7 +18,7 @@ const FamilyTreeComponent = ({ family }: FamilyTreeProps) => {
   return (
     <div className="space-y-8">
       {/* Parents Level */}
-      <div className="flex justify-center space-x-8">
+      <div className="flex justify-center gap-8 flex-wrap">
         {family.parents.map(parent => (
           <div key={parent.id} className="relative">
             <Button
@@ -38,7 +38,7 @@ const FamilyTreeComponent = ({ family }: FamilyTreeProps) => {
       </div>
 
       {/* Self, Spouse & Siblings Level */}
-      <div className="flex justify-center space-x-8">
+      <div className="flex justify-center gap-8 flex-wrap">
         {/* Siblings */}
         {family.siblings.map(sibling => (
           <div key={sibling.id} className="relative">
@@ -94,7 +94,7 @@ const FamilyTreeComponent = ({ family }: FamilyTreeProps) => {
 
       {/* Children Level */}
       {family.children.length > 0 && (
-        <div className="flex justify-center space-x-8">
+        <div className="flex justify-center gap-8 flex-wrap">
           {family.children.map(child => (
             <div key={child.id} className="relative">
               <Button
