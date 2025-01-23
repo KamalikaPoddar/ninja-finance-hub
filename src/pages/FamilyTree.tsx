@@ -1,9 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { EmptyState } from "@/components/family/EmptyState";
+import FamilyTreeComponent from "@/components/family/FamilyTree";
+import { useState } from "react";
+import type { FamilyTree } from "@/types/family";
 
 const FamilyTreePage = () => {
   const navigate = useNavigate();
+  const [familyData] = useState<FamilyTree | null>(null);
 
   const handleStartBuilding = () => {
     navigate("/family-tree/add");
@@ -17,7 +21,11 @@ const FamilyTreePage = () => {
           Secure your future by getting your family details in one place
         </p>
         
-        <EmptyState onStart={handleStartBuilding} />
+        {familyData ? (
+          <FamilyTreeComponent family={familyData} />
+        ) : (
+          <EmptyState onStart={handleStartBuilding} />
+        )}
       </div>
     </div>
   );
