@@ -35,3 +35,12 @@
     @apply bg-background text-foreground antialiased;
   }
 }
+
+@keyframes infinite-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-340px * 25)); }
+}
+
+.animate-infinite-scroll {
+  animation: infinite-scroll 90s linear infinite;
+}

@@ -23,20 +23,28 @@ export const Features = () => {
   return (
     <section className="py-12 bg-white">
       <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto space-y-6">
-          {features.map((feature, index) => (
-            <div
-              key={feature.title}
-              className="flex items-center justify-between p-6 rounded-xl bg-ninja-gray-100 hover:bg-ninja-gray-200 transition-colors animate-fadeIn"
-              style={{ animationDelay: `${index * 200}ms` }}
-            >
-              <div className="flex-1 pr-6">
-                <h3 className="text-lg font-semibold text-ninja-gray-900 mb-2">{feature.title}</h3>
-                <p className="text-sm text-ninja-gray-600">{feature.description}</p>
-              </div>
-              <feature.icon className="w-10 h-10 text-ninja-primary flex-shrink-0" />
+        <div className="w-full bg-white py-8 rounded-lg">
+          <section className="relative w-full h-[300px] overflow-hidden">
+            <div className="absolute w-[18000px] flex flex-row items-center animate-infinite-scroll">
+              {Array.from({ length: 30 }, (_, index) => {
+                const feature = features[index % features.length];
+                return (
+                  <div
+                    key={index}
+                    className="w-[340px] h-[300px] p-6 mx-2 flex flex-col items-center justify-center space-y-4 bg-ninja-gray-100 rounded-xl hover:bg-ninja-gray-200 transition-colors"
+                  >
+                    <feature.icon className="w-12 h-12 text-ninja-primary" />
+                    <h3 className="text-lg font-semibold text-ninja-gray-900">
+                      {feature.title}
+                    </h3>
+                    <p className="text-sm text-ninja-gray-600 text-center">
+                      {feature.description}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
-          ))}
+          </section>
         </div>
       </div>
     </section>
