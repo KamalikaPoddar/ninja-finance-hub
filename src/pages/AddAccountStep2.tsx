@@ -30,49 +30,73 @@ export const AddAccountStep2 = () => {
   const [linkedAccounts, setLinkedAccounts] = useState<string[]>([]);
   const [otpStates, setOtpStates] = useState<Record<string, boolean>>({});
 
-  const handleLinkAll = () => {
-    const allIds = mockAccounts.map(acc => `${acc.institution}-${acc.accountNumber || acc.policyNumber}`);
-    setLinkedAccounts(allIds);
-  };
-
+  // Manage OTP input values by account
   const [otpValues, setOtpValues] = useState<Record<string, string>>({});
-  const [otpError, setOtpError] = useState<{id: string | null, message: string | null}>({id: null, message: null});
+
+  // Manage OTP errors (if any)
+  const [otpError, setOtpError] = useState<{ id: string | null; message: string | null }>({
+    id: null,
+    message: null
+  });
 
   const { toast } = useToast();
 
+  // "Link All" toggles all accounts ON
+  const handleLinkAll = () => {
+    const allIds = mockAccounts.map(
+      (acc) => `${acc.institution}-${acc.accountNumber || acc.policyNumber}`
+    );
+    setLinkedAccounts(allIds);
+  };
+
+  // Verify OTP on Proceed
   const handleVerifyOTP = (id: string, otp: string) => {
-    if (otp === '1234') {
-      setOtpStates(prev => ({ ...prev, [id]: true }));
-      setOtpError(null);
-      setLinkedAccounts(prev => prev.filter(a => a !== id));
-      
-      // For Link All, process next account
-      if (linkedAccounts.length > 1) {
-        const currentIndex = linkedAccounts.indexOf(id);
-        if (currentIndex < linkedAccounts.length - 1) {
-          const nextId = linkedAccounts[currentIndex + 1];
-          // Scroll to next account
-          document.getElementById(nextId)?.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center'
-          });
-        }
-      }
-    } else {
-      setOtpError({id, message: 'Invalid OTP. Please try again.'});
+    // 1) Check if OTP has the right number of digits
+    if (otp.length !== 4) {
+      setOtpError({ id, message: 'Whoops, that looks short. Please enter all 4 digits of your OTP.' });
       toast({
-        title: 'Error',
-        description: 'Incorrect OTP',
+        title: 'Almost there!',
+        description: 'Please complete the 4-digit OTP to proceed.',
         variant: 'destructive'
       });
       return;
     }
+
+    // 2) Check if OTP is correct
+    if (otp !== '1234') {
+      setOtpError({ id, message: 'That code doesn’t look right. Double-check and try again!' });
+      toast({
+        title: 'Incorrect OTP',
+        description: 'Please verify the code and try once more.',
+        variant: 'destructive'
+      });
+      return;
+    }
+
+    // 3) If OTP is correct
+    setOtpStates((prev) => ({ ...prev, [id]: true }));
+    setOtpError({ id: null, message: null });
+
+    // Remove from "linkedAccounts" so the OTP prompt won't show
+    setLinkedAccounts((prev) => prev.filter((a) => a !== id));
+
+    // If user clicked "Link All," proceed to next account automatically
+    if (linkedAccounts.length > 1) {
+      const currentIndex = linkedAccounts.indexOf(id);
+      if (currentIndex < linkedAccounts.length - 1) {
+        const nextId = linkedAccounts[currentIndex + 1];
+        document.getElementById(nextId)?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+      }
+    }
   };
 
   return (
-    <div 
-      className="min-h-screen relative z-10" 
-      style={{ 
+    <div
+      className="min-h-screen relative z-10"
+      style={{
         backgroundColor: theme.colors.background,
         paddingTop: '80px'
       }}
@@ -90,16 +114,16 @@ export const AddAccountStep2 = () => {
               >
                 <X className="h-5 w-5" />
               </button>
-              <h1 
+              <h1
                 className="text-3xl font-bold"
                 style={{ color: theme.colors.text.primary }}
               >
                 Link Your Accounts
               </h1>
             </div>
-            <Button 
+            <Button
               onClick={handleLinkAll}
-              style={{ 
+              style={{
                 backgroundColor: theme.colors.primary,
                 color: theme.colors.surface
               }}
@@ -110,69 +134,80 @@ export const AddAccountStep2 = () => {
 
           {/* Main Content */}
           <div className="p-6 flex flex-col gap-4">
-            {mockAccounts.map((account, index) => {
+            {mockAccounts.map((account) => {
               const id = `${account.institution}-${account.accountNumber || account.policyNumber}`;
               const isLinked = linkedAccounts.includes(id);
               const isVerified = otpStates[id];
 
               return (
-                <div 
+                <div
                   key={id}
+                  id={id}
                   className="p-4 border rounded-lg flex items-center justify-between"
                   style={{ borderColor: theme.colors.background }}
                 >
                   <div>
-                    <h3 className="font-medium" style={{ color: theme.colors.text.primary }}>
+                    <h3
+                      className="font-medium"
+                      style={{ color: theme.colors.text.primary }}
+                    >
                       {account.institution}
                     </h3>
-                    <p className="text-sm" style={{ color: theme.colors.text.secondary }}>
+                    <p
+                      className="text-sm"
+                      style={{ color: theme.colors.text.secondary }}
+                    >
                       {account.type} ({account.accountNumber || account.policyNumber})
                     </p>
                   </div>
 
                   <div className="flex items-center gap-4">
+                    {/* If verified, show the purple check icon */}
                     {isVerified ? (
-                      <Check className="h-5 w-5" style={{ color: theme.colors.primary }} />
+                      <Check className="h-5 w-5" style={{ color: 'purple' }} />
                     ) : (
                       <>
+                        {/* If toggled ON but not verified, show OTP input + Proceed button */}
                         {isLinked && !isVerified && (
                           <div className="flex items-center gap-2">
-                            <input
-                              id={`otp-${id}`}
-                              type="text"
-                              maxLength={4}
-                              className="w-20 px-2 py-1 border rounded-md text-center"
-                              style={{
-                                borderColor: otpError ? theme.colors.error : theme.colors.background,
-                                color: theme.colors.text.primary
-                              }}
-                              placeholder="OTP"
-                              value={otpValues[id] || ''}
-                              onChange={(e) => {
-                                setOtpValues(prev => ({ ...prev, [id]: e.target.value }));
-                                setOtpError(null);
-                              }}
-                            />
-                            <div className="relative">
+                            <div className="flex items-center gap-2">
+                              <input
+                                id={`otp-${id}`}
+                                type="text"
+                                maxLength={4}
+                                className="w-20 px-2 py-1 border rounded-md text-center"
+                                style={{
+                                  borderColor:
+                                    otpError.id === id
+                                      ? theme.colors.error
+                                      : theme.colors.background,
+                                  color: theme.colors.text.primary
+                                }}
+                                placeholder="OTP"
+                                value={otpValues[id] || ''}
+                                onChange={(e) => {
+                                  setOtpValues((prev) => ({
+                                    ...prev,
+                                    [id]: e.target.value
+                                  }));
+                                  if (otpError.id === id) {
+                                    setOtpError({ id: null, message: null });
+                                  }
+                                }}
+                              />
                               {otpError.id === id && otpError.message && (
-                                <div className="relative">
-                                  <p className="text-sm absolute -top-6 left-0" style={{ color: theme.colors.error }}>
-                                    {otpError.message}
-                                  </p>
-                                </div>
+                                <p
+                                  className="text-sm"
+                                  style={{ color: theme.colors.error }}
+                                >
+                                  {otpError.message}
+                                </p>
                               )}
                             </div>
+
                             <Button
                               onClick={() => {
                                 const otp = otpValues[id] || '';
-                                if (otp.length !== 4) {
-                                  toast({
-                                    title: 'Error',
-                                    description: 'Please enter a 4-digit OTP',
-                                    variant: 'destructive'
-                                  });
-                                  return;
-                                }
                                 handleVerifyOTP(id, otp);
                               }}
                               style={{
@@ -184,13 +219,14 @@ export const AddAccountStep2 = () => {
                             </Button>
                           </div>
                         )}
+                        {/* Toggle to link/unlink the account */}
                         <OrangeToggle
                           checked={isLinked}
                           onChange={() => {
                             if (isLinked) {
-                              setLinkedAccounts(prev => prev.filter(a => a !== id));
+                              setLinkedAccounts((prev) => prev.filter((a) => a !== id));
                             } else {
-                              setLinkedAccounts(prev => [...prev, id]);
+                              setLinkedAccounts((prev) => [...prev, id]);
                             }
                           }}
                         />
@@ -203,21 +239,24 @@ export const AddAccountStep2 = () => {
           </div>
 
           {/* Footer */}
-          <footer className="p-4 border-t rounded-b-lg" style={{ borderColor: theme.colors.background }}>
+          <footer
+            className="p-4 border-t rounded-b-lg"
+            style={{ borderColor: theme.colors.background }}
+          >
             <div className="flex items-center justify-between">
-              <div 
+              <div
                 className="h-[4px] w-full rounded-md"
                 style={{ backgroundColor: theme.colors.background }}
               >
-                <div 
+                <div
                   className="h-full rounded-md"
-                  style={{ 
+                  style={{
                     width: '66%',
                     backgroundColor: theme.colors.primary
                   }}
                 />
               </div>
-              <p 
+              <p
                 className="text-sm ml-4"
                 style={{ color: theme.colors.text.secondary }}
               >
