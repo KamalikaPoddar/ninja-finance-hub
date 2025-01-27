@@ -8,6 +8,7 @@ import Vault from '@/pages/Vault';
 import ConsentPage from '@/pages/ConsentPage';
 import AccountDetail from '@/pages/AccountDetail';
 import AddAccount from '@/pages/AddAccount';
+import { AddAccountStep2 } from '@/pages/AddAccountStep2';
 import { VaultExpanded } from '@/pages/VaultExpanded';
 import FamilyTreePage from '@/pages/FamilyTree';
 import AddFamilyMember from '@/pages/AddFamilyMember';
@@ -52,6 +53,7 @@ function App() {
             <Route path="/consent" element={<ConsentPage />} />
             <Route path="/account/:accountId" element={<AccountDetail />} />
             <Route path="/add-account" element={<AddAccount />} />
+            <Route path="/add-account-step2" element={<AddAccountStep2 />} />
             <Route path="/vault/expanded" element={<VaultExpanded />} />
             <Route path="/family-tree" element={<FamilyTreePage />} />
             <Route path="/family-tree/add" element={<AddFamilyMember />} />

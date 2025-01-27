@@ -30,10 +30,10 @@ const TooltipContent = React.forwardRef<
         className
       )}
       style={{
-        backgroundColor: 'rgba(177, 157, 201, 0.4)',
+        backgroundColor: theme.components.tooltip.background,
         color: theme.colors.text.primary,
-        border: `1px solid ${theme.colors.background}`,
-        backdropFilter: 'blur(4px)'
+        border: `${theme.components.tooltip.border} ${theme.colors.background}`,
+        backdropFilter: theme.components.tooltip.backdropFilter
       }}
       {...props}
     >
@@ -42,7 +42,7 @@ const TooltipContent = React.forwardRef<
         <TooltipPrimitive.Arrow 
           className="-my-px drop-shadow-[0_1px_0_hsl(var(--border))]"
           style={{
-            fill: 'rgba(177, 157, 201, 0.4)'
+            fill: theme.components.tooltip.arrow.fill
           }}
         />
       )}

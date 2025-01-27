@@ -55,6 +55,16 @@ export const theme = {
     8: '2rem',
     9: '2.25rem',
     10: '2.5rem'
+  },
+  components: {
+    tooltip: {
+      background: 'rgba(177, 157, 201, 0.4)',
+      border: '1px solid',
+      backdropFilter: 'blur(4px)',
+      arrow: {
+        fill: 'rgba(177, 157, 201, 0.4)'
+      }
+    }
   }
 };
 
