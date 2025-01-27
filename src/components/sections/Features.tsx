@@ -25,7 +25,7 @@ export const Features = () => {
       <div className="container mx-auto px-4">
         <div className="w-full bg-white py-8 rounded-lg">
           <section className="relative w-full h-[300px] overflow-hidden">
-            <div className="absolute w-[18000px] flex flex-row items-center animate-infinite-scroll">
+            <div className="absolute w-[calc(340px*30)] flex flex-row items-center animate-infinite-scroll">
               {Array.from({ length: 30 }, (_, index) => {
                 const feature = features[index % features.length];
                 return (
