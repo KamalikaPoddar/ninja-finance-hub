@@ -3,7 +3,9 @@ import { Account } from '@/types/account';
 export const sampleAccounts: Account[] = [
   {
     id: '1',
-    name: 'Bank One',
+    name: 'SBI bank',
+    accountType: 'Savings Account',
+    accountNumber: '***********7890',
     balance: 10000,
     lastTransactionDate: '2025-01-15',
     isConnected: true,
@@ -13,7 +15,9 @@ export const sampleAccounts: Account[] = [
   },
   {
     id: '2',
-    name: 'Bank Two',
+    name: 'HDFC Bank',
+    accountType: 'Term Deposit',
+    accountNumber: '***********7890',
     balance: 25000,
     lastTransactionDate: '2024-12-20',
     isConnected: false,
@@ -22,7 +26,9 @@ export const sampleAccounts: Account[] = [
   },
   {
     id: '3',
-    name: 'Bank Three',
+    name: 'Axis Bank',
+    accountType: 'Recurring Deposit',
+    accountNumber: '***********7890',
     balance: 15000,
     lastTransactionDate: '2025-01-10',
     isConnected: true,

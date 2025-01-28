@@ -27,21 +27,34 @@ const mockAccounts = [
 
 export const AddAccountStep2 = () => {
   const navigate = useNavigate();
+
+  // Track which accounts are toggled ON (linked)
   const [linkedAccounts, setLinkedAccounts] = useState<string[]>([]);
+
+  // Track which accounts have successfully verified OTP
   const [otpStates, setOtpStates] = useState<Record<string, boolean>>({});
 
-  // Manage OTP input values by account
+  // Track OTP input values
   const [otpValues, setOtpValues] = useState<Record<string, string>>({});
 
-  // Manage OTP errors (if any)
-  const [otpError, setOtpError] = useState<{ id: string | null; message: string | null }>({
+  // Track OTP errors
+  const [otpError, setOtpError] = useState<{
+    id: string | null;
+    message: string | null;
+  }>({
     id: null,
     message: null
   });
 
+  // Once any OTP is verified, show a "Proceed" button
+  const [hasVerifiedAtLeastOneOTP, setHasVerifiedAtLeastOneOTP] = useState(false);
+
+  // Loading state for "Fetching Accounts..."
+  const [isLoading, setIsLoading] = useState(false);
+
   const { toast } = useToast();
 
-  // "Link All" toggles all accounts ON
+  // Link all accounts
   const handleLinkAll = () => {
     const allIds = mockAccounts.map(
       (acc) => `${acc.institution}-${acc.accountNumber || acc.policyNumber}`
@@ -49,11 +62,14 @@ export const AddAccountStep2 = () => {
     setLinkedAccounts(allIds);
   };
 
-  // Verify OTP on Proceed
+  // Verify OTP logic
   const handleVerifyOTP = (id: string, otp: string) => {
     // 1) Check if OTP has the right number of digits
     if (otp.length !== 4) {
-      setOtpError({ id, message: 'Whoops, that looks short. Please enter all 4 digits of your OTP.' });
+      setOtpError({
+        id,
+        message: 'Whoops, that looks short. Please enter all 4 digits of your OTP.'
+      });
       toast({
         title: 'Almost there!',
         description: 'Please complete the 4-digit OTP to proceed.',
@@ -62,9 +78,12 @@ export const AddAccountStep2 = () => {
       return;
     }
 
-    // 2) Check if OTP is correct
+    // 2) Check if the OTP is correct
     if (otp !== '1234') {
-      setOtpError({ id, message: 'That code doesn’t look right. Double-check and try again!' });
+      setOtpError({
+        id,
+        message: 'That code doesn’t look right. Double-check and try again!'
+      });
       toast({
         title: 'Incorrect OTP',
         description: 'Please verify the code and try once more.',
@@ -76,11 +95,10 @@ export const AddAccountStep2 = () => {
     // 3) If OTP is correct
     setOtpStates((prev) => ({ ...prev, [id]: true }));
     setOtpError({ id: null, message: null });
-
-    // Remove from "linkedAccounts" so the OTP prompt won't show
+    setHasVerifiedAtLeastOneOTP(true);
     setLinkedAccounts((prev) => prev.filter((a) => a !== id));
 
-    // If user clicked "Link All," proceed to next account automatically
+    // If "Link All" was used, scroll to the next account automatically
     if (linkedAccounts.length > 1) {
       const currentIndex = linkedAccounts.indexOf(id);
       if (currentIndex < linkedAccounts.length - 1) {
@@ -167,7 +185,7 @@ export const AddAccountStep2 = () => {
                       <Check className="h-5 w-5" style={{ color: 'purple' }} />
                     ) : (
                       <>
-                        {/* If toggled ON but not verified, show OTP input + Proceed button */}
+                        {/* Show OTP input + "Proceed" if toggled ON but not yet verified */}
                         {isLinked && !isVerified && (
                           <div className="flex items-center gap-2">
                             <div className="flex items-center gap-2">
@@ -219,12 +237,15 @@ export const AddAccountStep2 = () => {
                             </Button>
                           </div>
                         )}
-                        {/* Toggle to link/unlink the account */}
+
+                        {/* Toggle switch to link/unlink the account */}
                         <OrangeToggle
                           checked={isLinked}
                           onChange={() => {
                             if (isLinked) {
-                              setLinkedAccounts((prev) => prev.filter((a) => a !== id));
+                              setLinkedAccounts((prev) =>
+                                prev.filter((a) => a !== id)
+                              );
                             } else {
                               setLinkedAccounts((prev) => [...prev, id]);
                             }
@@ -236,6 +257,34 @@ export const AddAccountStep2 = () => {
                 </div>
               );
             })}
+
+            {/* If at least one OTP is verified, show the "Proceed" button */}
+            {hasVerifiedAtLeastOneOTP && (
+              <div className="flex justify-end mt-4">
+                <Button
+                  onClick={async () => {
+                    setIsLoading(true);
+                    // Simulate API fetch delay
+                    await new Promise((resolve) => setTimeout(resolve, 2000));
+                    navigate('/account');
+                  }}
+                  disabled={isLoading}
+                  style={{
+                    backgroundColor: theme.colors.primary,
+                    color: theme.colors.surface
+                  }}
+                >
+                  {isLoading ? (
+                    <div className="flex items-center gap-2">
+                      <div className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full" />
+                      Fetching Accounts...
+                    </div>
+                  ) : (
+                    'Proceed'
+                  )}
+                </Button>
+              </div>
+            )}
           </div>
 
           {/* Footer */}
