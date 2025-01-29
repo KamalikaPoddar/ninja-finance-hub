@@ -14,6 +14,7 @@ import FamilyTreePage from '@/pages/FamilyTree';
 import AddFamilyMember from '@/pages/AddFamilyMember';
 import FamilyVerification from '@/pages/FamilyVerification';
 import VerifyRelationship from '@/pages/VerifyRelationship';
+import { Account } from '@/pages/Account';
 import { Home, Lock, User, Users } from 'lucide-react';
 
 const navItems = [
@@ -51,6 +52,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/vault" element={<Vault />} />
             <Route path="/consent" element={<ConsentPage />} />
+            <Route path="/account" element={<Account />} />
             <Route path="/account/:accountId" element={<AccountDetail />} />
             <Route path="/add-account" element={<AddAccount />} />
             <Route path="/add-account-step2" element={<AddAccountStep2 />} />

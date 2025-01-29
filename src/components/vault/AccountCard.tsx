@@ -7,6 +7,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { useState } from 'react';
+import { theme } from '@/config/theme';
 
 interface AccountCardProps {
   account: {
@@ -47,7 +48,7 @@ const AccountCard = ({ account, onClick }: AccountCardProps) => {
               <Button 
                 variant="outline" 
                 size="sm"
-                className="h-8 border-gray-200"
+                className="h-8 border-red-200 text-red-600 hover:bg-red-50"
                 onClick={(e) => {
                   e.stopPropagation();
                   // Handle nominee action
