@@ -11,7 +11,9 @@ export const accountData: Account[] = [
     lastTransactionDate: '2025-01-15',
     isConnected: true,
     isDormant: false,
-    hasNominee: true
+    hasNominee: true,
+    isFamilyVerified: true,
+    lastUpdated: '2024-03-20'
   },
   {
     id: '2',
@@ -23,7 +25,9 @@ export const accountData: Account[] = [
     lastTransactionDate: '2024-12-20',
     isConnected: false,
     isDormant: true,
-    hasNominee: false
+    hasNominee: false,
+    isFamilyVerified: false,
+    lastUpdated: '2024-03-19'
   },
   {
     id: '3',
@@ -35,7 +39,9 @@ export const accountData: Account[] = [
     lastTransactionDate: '2025-01-10',
     isConnected: true,
     isDormant: false,
-    hasNominee: true
+    hasNominee: true,
+    isFamilyVerified: true,
+    lastUpdated: '2024-03-18'
   }
 ];
 
