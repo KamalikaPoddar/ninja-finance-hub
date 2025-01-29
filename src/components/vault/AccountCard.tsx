@@ -13,6 +13,9 @@ interface AccountCardProps {
   account: {
     id: string;
     name: string;
+    institutionName: string;
+    accountType: string;
+    accountNumber: string;
     balance: number;
     lastTransactionDate?: string;
     isConnected: boolean;
@@ -26,6 +29,7 @@ const AccountCard = ({ account, onClick }: AccountCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
+<<<<<<< Updated upstream
     <Card className="w-full bg-white shadow-sm hover:shadow-md transition-shadow">
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <div className="flex items-center justify-between p-6" onClick={onClick}>
@@ -41,6 +45,76 @@ const AccountCard = ({ account, onClick }: AccountCardProps) => {
                 {account.isConnected ? 'Connected' : 'Disconnected'}
               </p>
             </div>
+=======
+    <Card 
+      className="hover:shadow-md transition-shadow cursor-pointer" 
+      onClick={onClick}
+      style={{ backgroundColor: theme.colors.surface }}
+    >
+      <CardHeader className="p-4">
+        <div className="flex justify-between items-center">
+          <CardTitle 
+            className="text-lg"
+            style={{ color: theme.colors.text.primary }}
+          >
+            {account.name}
+          </CardTitle>
+          
+          {/* No Nominee button moved to top right */}
+          {!account.hasNominee && (
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="h-8 px-2"
+              style={{ 
+                borderColor: theme.colors.primary,
+                color: theme.colors.primary
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <UserX className="h-3 w-3 mr-1" />
+              <span className="text-xs">No Nominee</span>
+            </Button>
+          )}
+        </div>
+      </CardHeader>
+      
+      <CardContent className="space-y-2 p-4 pt-0">
+        {/* Account Type */}
+        <p
+          className="text-sm"
+          style={{ color: theme.colors.text.secondary }}
+        >
+          Account Type: {account.accountType}
+        </p>
+      
+        {/* Masked Account Number */}
+        <p
+          className="text-sm"
+          style={{ color: theme.colors.text.secondary }}
+        >
+          Account Number: {account.accountNumber.replace(/.(?=.{4})/g, '*')}
+        </p>
+      
+        {/* Balance */}
+        <p
+          className="text-2xl font-bold"
+          style={{ color: theme.colors.text.primary }}
+        >
+          ₹{account.balance.toLocaleString()}
+        </p>
+      
+        {/* Last Transaction Date */}
+        {account.lastTransactionDate && (
+          <div
+            className="flex items-center gap-2 text-sm"
+            style={{ color: theme.colors.text.secondary }}
+          >
+            <CalendarDays className="h-4 w-4" />
+            <span>
+              Last transaction: {new Date(account.lastTransactionDate).toLocaleDateString()}
+            </span>
+>>>>>>> Stashed changes
           </div>
 
           <div className="flex items-center gap-3">

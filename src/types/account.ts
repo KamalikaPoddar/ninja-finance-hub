@@ -1,12 +1,12 @@
 export interface Account {
   id: string;
   name: string;
+  institutionName: string;
+  accountType: string;
   balance: number;
-  lastUpdated?: string;
-  isActive?: boolean;
-  nominee?: string;
-  isConnected: boolean;
+  accountNumber: string;
   lastTransactionDate?: string;
+  isConnected: boolean;
   isDormant?: boolean;
   hasNominee?: boolean;
   isFamilyVerified?: boolean;

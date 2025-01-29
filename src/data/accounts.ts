@@ -4,6 +4,7 @@ export const accountData: Account[] = [
   {
     id: '1',
     name: 'SBI bank',
+    institutionName: 'SBI',
     accountType: 'Savings Account',
     accountNumber: '***********7890',
     accountHoldername: 'John Doe',
@@ -17,6 +18,7 @@ export const accountData: Account[] = [
   {
     id: '2',
     name: 'HDFC Bank',
+    institutionName: 'HDFC',
     accountType: 'Term Deposit',
     accountNumber: '***********7890',
     accountHoldername: 'John Doe',
@@ -29,6 +31,7 @@ export const accountData: Account[] = [
   {
     id: '3',
     name: 'Axis Bank',
+    institutionName: 'Axis',
     accountType: 'Recurring Deposit',
     accountNumber: '***********7890',
     accountHoldername: 'John Doe',
