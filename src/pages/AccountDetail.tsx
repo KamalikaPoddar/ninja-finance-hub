@@ -27,6 +27,8 @@ const AccountDetail = () => {
       hasNominee: true,
       nominee: 'John Doe',
       daysToDormancy: 15,
+      isFamilyVerified: true,
+      lastUpdated: '2024-03-20',
       recentTransactions: [
         { date: '2025-01-15', amount: -500, description: 'Grocery Store' },
         { date: '2025-01-10', amount: 2000, description: 'Salary' }
@@ -45,6 +47,8 @@ const AccountDetail = () => {
       hasNominee: false,
       nominee: 'Jane Smith',
       daysToDormancy: 30,
+      isFamilyVerified: false,
+      lastUpdated: '2024-03-19',
       recentTransactions: [
         { date: '2025-01-12', amount: -1000, description: 'Rent' },
         { date: '2025-01-05', amount: 3000, description: 'Freelance Work' }
@@ -63,6 +67,8 @@ const AccountDetail = () => {
       hasNominee: true,
       nominee: 'Alice Johnson',
       daysToDormancy: 45,
+      isFamilyVerified: true,
+      lastUpdated: '2024-03-18',
       recentTransactions: [
         { date: '2025-01-08', amount: -750, description: 'Utilities' },
         { date: '2025-01-02', amount: 1500, description: 'Investment Return' }
