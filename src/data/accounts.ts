@@ -1,12 +1,73 @@
 import { Account } from '@/types/account';
 
+export const sampleAccounts: Account[] = [
+  {
+    id: '1',
+    name: 'SBI bank',
+    institutionName: 'SBI',
+    accountType: 'Savings Account',
+    accountNumber: '***********7890',
+    balance: 10000,
+    lastTransactionDate: '2025-01-15',
+    isConnected: true,
+    isDormant: false,
+    hasNominee: true,
+    isFamilyVerified: false,
+    lastUpdated: '2025-01-15',
+    nominee: 'Jane Doe',
+    daysToDormancy: 0,
+    recentTransactions: [
+      { date: '2025-01-15', amount: 1000, description: 'Deposit' },
+      { date: '2025-01-10', amount: 500, description: 'Withdrawal' },
+    ],
+  },
+  {
+    id: '2',
+    name: 'HDFC Bank',
+    institutionName: 'HDFC',
+    accountType: 'Term Deposit',
+    accountNumber: '***********7890',
+    balance: 25000,
+    lastTransactionDate: '2024-12-20',
+    isConnected: false,
+    isDormant: true,
+    hasNominee: false,
+    isFamilyVerified: false,
+    lastUpdated: '2024-12-20',
+    nominee: null,
+    daysToDormancy: 30,
+    recentTransactions: [
+      { date: '2024-12-20', amount: 2000, description: 'Deposit' },
+    ],
+  },
+  {
+    id: '3',
+    name: 'Axis Bank',
+    institutionName: 'Axis',
+    accountType: 'Recurring Deposit',
+    accountNumber: '***********7890',
+    balance: 15000,
+    lastTransactionDate: '2025-01-10',
+    isConnected: true,
+    isDormant: false,
+    hasNominee: true,
+    isFamilyVerified: true,
+    lastUpdated: '2025-01-10',
+    nominee: 'Bob Johnson',
+    daysToDormancy: 0,
+    recentTransactions: [
+      { date: '2025-01-10', amount: 1500, description: 'Deposit' },
+    ],
+  }
+];
+
 export const accountData: Account[] = [
   {
     id: '1',
     name: 'SBI bank',
+    institutionName: 'SBI',
     accountType: 'Savings Account',
     accountNumber: '***********7890',
-    accountHoldername: 'John Doe',
     balance: 10000,
     lastTransactionDate: '2025-01-15',
     isConnected: true,
@@ -24,9 +85,9 @@ export const accountData: Account[] = [
   {
     id: '2',
     name: 'HDFC Bank',
+    institutionName: 'HDFC',
     accountType: 'Term Deposit',
     accountNumber: '***********7890',
-    accountHoldername: 'John Doe',
     balance: 25000,
     lastTransactionDate: '2024-12-20',
     isConnected: false,
@@ -44,9 +105,9 @@ export const accountData: Account[] = [
   {
     id: '3',
     name: 'Axis Bank',
+    institutionName: 'Axis',
     accountType: 'Recurring Deposit',
     accountNumber: '***********7890',
-    accountHoldername: 'John Doe',
     balance: 15000,
     lastTransactionDate: '2025-01-10',
     isConnected: true,
@@ -62,5 +123,3 @@ export const accountData: Account[] = [
     ]
   }
 ];
-
-export { accountData as sampleAccounts };
