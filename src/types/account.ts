@@ -5,14 +5,13 @@ export interface Account {
   accountType: string;
   accountNumber: string;
   balance: number;
-  lastTransactionDate: string;
+  lastTransactionDate?: string;
   isConnected: boolean;
-  isDormant: boolean;
-  hasNominee: boolean;
-  nominee?: string;
+  isDormant?: boolean;
+  hasNominee?: boolean;
+  isFamilyVerified?: boolean;
   daysToDormancy?: number;
-  isFamilyVerified: boolean;
-  lastUpdated: string;
+  accountHoldername: string;
   recentTransactions?: {
     date: string;
     amount: number;
@@ -24,4 +23,5 @@ export interface Institution {
   id: string;
   name: string;
   logoUrl?: string;
+  institutionType: string;
 }
