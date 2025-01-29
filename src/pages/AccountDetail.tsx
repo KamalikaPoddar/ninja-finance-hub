@@ -17,53 +17,56 @@ const AccountDetail = () => {
     {
       id: '1',
       name: 'Bank One',
+      accountType: 'Savings',
+      accountNumber: '****1234',
+      accountHoldername: 'John Doe',
       balance: 10000,
-      lastUpdated: new Date().toLocaleString(),
-      isActive: true,
+      lastTransactionDate: '2025-01-15',
+      isConnected: true,
+      isDormant: false,
+      hasNominee: true,
       nominee: 'John Doe',
       daysToDormancy: 15,
       recentTransactions: [
         { date: '2025-01-15', amount: -500, description: 'Grocery Store' },
         { date: '2025-01-10', amount: 2000, description: 'Salary' }
-      ],
-      isConnected: true,
-      lastTransactionDate: '2025-01-15',
-      isDormant: false,
-      hasNominee: true
+      ]
     },
     {
       id: '2',
       name: 'Bank Two',
+      accountType: 'Current',
+      accountNumber: '****5678',
+      accountHoldername: 'Jane Smith',
       balance: 25000,
-      lastUpdated: new Date().toLocaleString(),
-      isActive: true,
+      lastTransactionDate: '2024-12-20',
+      isConnected: false,
+      isDormant: true,
+      hasNominee: false,
       nominee: 'Jane Smith',
       daysToDormancy: 30,
       recentTransactions: [
         { date: '2025-01-12', amount: -1000, description: 'Rent' },
         { date: '2025-01-05', amount: 3000, description: 'Freelance Work' }
-      ],
-      isConnected: false,
-      lastTransactionDate: '2024-12-20',
-      isDormant: true,
-      hasNominee: false
+      ]
     },
     {
       id: '3',
       name: 'Bank Three',
+      accountType: 'Savings',
+      accountNumber: '****9012',
+      accountHoldername: 'Alice Johnson',
       balance: 15000,
-      lastUpdated: new Date().toLocaleString(),
-      isActive: true,
+      lastTransactionDate: '2025-01-10',
+      isConnected: true,
+      isDormant: false,
+      hasNominee: true,
       nominee: 'Alice Johnson',
       daysToDormancy: 45,
       recentTransactions: [
         { date: '2025-01-08', amount: -750, description: 'Utilities' },
         { date: '2025-01-02', amount: 1500, description: 'Investment Return' }
-      ],
-      isConnected: true,
-      lastTransactionDate: '2025-01-10',
-      isDormant: false,
-      hasNominee: true
+      ]
     }
   ];
 
