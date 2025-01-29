@@ -1,6 +1,6 @@
 import { Header } from '@/components/layout/Header';
 import { theme } from '@/config/theme';
-import { AccountData, accountData } from '@/data/accounts';
+import { accountData } from '@/data/accounts';
 import { format } from 'date-fns';
 import { Check, X, AlertCircle } from 'lucide-react';
 
