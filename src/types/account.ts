@@ -7,10 +7,8 @@ export interface Account {
   balance: number;
   lastTransactionDate: string;
   isConnected: boolean;
-  isDormant?: boolean;
-  hasNominee?: boolean;
-  isFamilyVerified?: boolean;
-  lastUpdated?: string;
+  isDormant: boolean;
+  hasNominee: boolean;
   nominee?: string;
   daysToDormancy?: number;
   recentTransactions?: {

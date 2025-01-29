@@ -11,8 +11,7 @@ export const accountData: Account[] = [
     lastTransactionDate: '2025-01-15',
     isConnected: true,
     isDormant: false,
-    hasNominee: true,
-    isFamilyVerified: false
+    hasNominee: true
   },
   {
     id: '2',

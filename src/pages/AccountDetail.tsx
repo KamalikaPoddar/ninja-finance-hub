@@ -12,7 +12,7 @@ const AccountDetail = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  // TODO: Fetch accounts from API
+  // Mock accounts data
   const accounts: Account[] = [
     {
       id: '1',
