@@ -11,7 +11,8 @@ export interface Account {
   hasNominee?: boolean;
   isFamilyVerified?: boolean;
   daysToDormancy?: number;
-  accountHoldername: string;
+  lastUpdated?: string;
+  nominee?: string | null;
   recentTransactions?: {
     date: string;
     amount: number;
