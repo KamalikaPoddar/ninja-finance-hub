@@ -7,18 +7,10 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { useState } from 'react';
-import { theme } from '@/config/theme';
+import { Account } from '@/types/account';
 
 interface AccountCardProps {
-  account: {
-    id: string;
-    name: string;
-    balance: number;
-    lastTransactionDate?: string;
-    isConnected: boolean;
-    isDormant?: boolean;
-    hasNominee?: boolean;
-  };
+  account: Account;
   onClick: () => void;
 }
 
