@@ -17,16 +17,18 @@ const AccountDetail = () => {
     {
       id: '1',
       name: 'Bank One',
+      institutionName: 'Bank One Corp',
+      accountType: 'Savings',
+      accountNumber: '****1234',
       balance: 10000,
       lastUpdated: new Date().toLocaleString(),
-      isActive: true,
+      isConnected: true,
       nominee: 'John Doe',
       daysToDormancy: 15,
       recentTransactions: [
         { date: '2025-01-15', amount: -500, description: 'Grocery Store' },
         { date: '2025-01-10', amount: 2000, description: 'Salary' }
       ],
-      isConnected: true,
       lastTransactionDate: '2025-01-15',
       isDormant: false,
       hasNominee: true
@@ -34,16 +36,18 @@ const AccountDetail = () => {
     {
       id: '2',
       name: 'Bank Two',
+      institutionName: 'Bank Two Corp',
+      accountType: 'Current',
+      accountNumber: '****5678',
       balance: 25000,
       lastUpdated: new Date().toLocaleString(),
-      isActive: true,
+      isConnected: false,
       nominee: 'Jane Smith',
       daysToDormancy: 30,
       recentTransactions: [
         { date: '2025-01-12', amount: -1000, description: 'Rent' },
         { date: '2025-01-05', amount: 3000, description: 'Freelance Work' }
       ],
-      isConnected: false,
       lastTransactionDate: '2024-12-20',
       isDormant: true,
       hasNominee: false
@@ -51,16 +55,18 @@ const AccountDetail = () => {
     {
       id: '3',
       name: 'Bank Three',
+      institutionName: 'Bank Three Corp',
+      accountType: 'Savings',
+      accountNumber: '****9012',
       balance: 15000,
       lastUpdated: new Date().toLocaleString(),
-      isActive: true,
+      isConnected: true,
       nominee: 'Alice Johnson',
       daysToDormancy: 45,
       recentTransactions: [
         { date: '2025-01-08', amount: -750, description: 'Utilities' },
         { date: '2025-01-02', amount: 1500, description: 'Investment Return' }
       ],
-      isConnected: true,
       lastTransactionDate: '2025-01-10',
       isDormant: false,
       hasNominee: true
@@ -116,12 +122,14 @@ const AccountDetail = () => {
             <CardTitle style={{ color: theme.colors.text.primary }}>
               Account Details
             </CardTitle>
-            <p 
-              className="text-sm"
-              style={{ color: theme.colors.text.secondary }}
-            >
-              Last updated: {account.lastUpdated}
-            </p>
+            {account.lastUpdated && (
+              <p 
+                className="text-sm"
+                style={{ color: theme.colors.text.secondary }}
+              >
+                Last updated: {account.lastUpdated}
+              </p>
+            )}
           </CardHeader>
           
           <CardContent className="space-y-4">
@@ -167,7 +175,7 @@ const AccountDetail = () => {
                 style={{ color: theme.colors.text.secondary }}
               >
                 <User className="h-4 w-4" />
-                <span>{account.nominee}</span>
+                <span>{account.nominee || 'No nominee assigned'}</span>
               </div>
               <Button 
                 variant="link" 
@@ -187,7 +195,7 @@ const AccountDetail = () => {
                 Recent Transactions
               </h3>
               <div className="space-y-2">
-                {account.recentTransactions.map((transaction, index) => (
+                {account.recentTransactions?.map((transaction, index) => (
                   <div 
                     key={index} 
                     className="flex justify-between"

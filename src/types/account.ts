@@ -3,17 +3,17 @@ export interface Account {
   name: string;
   institutionName: string;
   accountType: string;
-  balance: number;
   accountNumber: string;
+  accountHoldername?: string;
+  balance: number;
   lastTransactionDate?: string;
+  lastUpdated?: string;
   isConnected: boolean;
   isDormant?: boolean;
   hasNominee?: boolean;
   isFamilyVerified?: boolean;
+  nominee?: string;
   daysToDormancy?: number;
-  accountType?: string;
-  accountNumber?: string;
-  accountHoldername?: string;
   recentTransactions?: {
     date: string;
     amount: number;
