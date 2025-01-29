@@ -73,7 +73,7 @@ const AccountCard = ({ account, onClick }: AccountCardProps) => {
               {account.isFamilyVerified ? (
                 <Check className="h-4 w-4 text-green-600" />
               ) : (
-                <AlertCircle className="h-4 w-4 text-yellow-600" />
+                <AlertTriangle className="h-4 w-4 text-yellow-600" />
               )}
             </div>
 
