@@ -75,7 +75,7 @@ export const Account = () => {
                     Last Transaction
                   </span>
                   <span className="text-sm" style={{ color: theme.colors.text.primary }}>
-                    {format(new Date(account.lastTransactionDate), 'dd MMM yyyy')}
+                    {account.lastTransactionDate && format(new Date(account.lastTransactionDate), 'dd MMM yyyy')}
                   </span>
                 </div>
 
