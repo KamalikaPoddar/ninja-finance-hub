@@ -6,77 +6,14 @@ import { Header } from '@/components/layout/Header';
 import { ArrowLeft, AlertTriangle, User, FileSignature, X } from 'lucide-react';
 import { theme } from '@/config/theme';
 import { Account } from '@/types/account';
+import { accountData } from '@/data/accounts';
 
 const AccountDetail = () => {
   const { accountId } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  // Mock accounts data
-  const accounts: Account[] = [
-    {
-      id: '1',
-      name: 'Bank One',
-      accountType: 'Savings',
-      accountNumber: '****1234',
-      accountHoldername: 'John Doe',
-      balance: 10000,
-      lastTransactionDate: '2025-01-15',
-      isConnected: true,
-      isDormant: false,
-      hasNominee: true,
-      nominee: 'John Doe',
-      daysToDormancy: 15,
-      isFamilyVerified: true,
-      lastUpdated: '2024-03-20',
-      recentTransactions: [
-        { date: '2025-01-15', amount: -500, description: 'Grocery Store' },
-        { date: '2025-01-10', amount: 2000, description: 'Salary' }
-      ]
-    },
-    {
-      id: '2',
-      name: 'Bank Two',
-      accountType: 'Current',
-      accountNumber: '****5678',
-      accountHoldername: 'Jane Smith',
-      balance: 25000,
-      lastTransactionDate: '2024-12-20',
-      isConnected: false,
-      isDormant: true,
-      hasNominee: false,
-      nominee: 'Jane Smith',
-      daysToDormancy: 30,
-      isFamilyVerified: false,
-      lastUpdated: '2024-03-19',
-      recentTransactions: [
-        { date: '2025-01-12', amount: -1000, description: 'Rent' },
-        { date: '2025-01-05', amount: 3000, description: 'Freelance Work' }
-      ]
-    },
-    {
-      id: '3',
-      name: 'Bank Three',
-      accountType: 'Savings',
-      accountNumber: '****9012',
-      accountHoldername: 'Alice Johnson',
-      balance: 15000,
-      lastTransactionDate: '2025-01-10',
-      isConnected: true,
-      isDormant: false,
-      hasNominee: true,
-      nominee: 'Alice Johnson',
-      daysToDormancy: 45,
-      isFamilyVerified: true,
-      lastUpdated: '2024-03-18',
-      recentTransactions: [
-        { date: '2025-01-08', amount: -750, description: 'Utilities' },
-        { date: '2025-01-02', amount: 1500, description: 'Investment Return' }
-      ]
-    }
-  ];
-
-  const account = accounts.find(acc => acc.id === accountId);
+  const account = accountData.find(acc => acc.id === accountId);
 
   if (!account) {
     return (
