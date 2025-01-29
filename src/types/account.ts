@@ -1,9 +1,9 @@
 export interface Account {
   id: string;
   name: string;
+  institutionName: string;
   accountType: string;
   accountNumber: string;
-  accountHoldername: string;
   balance: number;
   lastTransactionDate: string;
   isConnected: boolean;
