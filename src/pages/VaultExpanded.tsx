@@ -39,18 +39,7 @@ export const VaultExpanded = () => {
             {accounts.map((account) => (
               <AccountCard
                 key={account.id}
-                account={{
-                  id: account.id,
-                  name: account.name,
-                  institutionName: account.institutionName,
-                  accountType: account.accountType,
-                  accountNumber: account.accountNumber,
-                  balance: account.balance,
-                  lastTransactionDate: account.lastTransactionDate,
-                  isConnected: account.isConnected,
-                  isDormant: account.isDormant,
-                  hasNominee: account.hasNominee,
-                }}
+                account={account}
                 onClick={() => navigate(`/account/${account.id}`)}
               />
             ))}
