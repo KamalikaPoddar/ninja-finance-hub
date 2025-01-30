@@ -15,6 +15,7 @@ export const sampleAccounts: Account[] = [
     isFamilyVerified: false,
     lastUpdated: '2025-01-15',
     nominee: 'Jane Doe',
+    accountHoldername: 'John Doe',
     daysToDormancy: 0,
     recentTransactions: [
       { date: '2025-01-15', amount: 1000, description: 'Deposit' },
@@ -35,6 +36,7 @@ export const sampleAccounts: Account[] = [
     isFamilyVerified: false,
     lastUpdated: '2024-12-20',
     nominee: null,
+    accountHoldername: 'Jane Smith',
     daysToDormancy: 30,
     recentTransactions: [
       { date: '2024-12-20', amount: 2000, description: 'Deposit' },
@@ -54,6 +56,7 @@ export const sampleAccounts: Account[] = [
     isFamilyVerified: true,
     lastUpdated: '2025-01-10',
     nominee: 'Bob Johnson',
+    accountHoldername: 'Alice Johnson',
     daysToDormancy: 0,
     recentTransactions: [
       { date: '2025-01-10', amount: 1500, description: 'Deposit' },
@@ -74,6 +77,7 @@ export const accountData: Account[] = [
     isDormant: false,
     hasNominee: true,
     nominee: 'Jane Doe',
+    accountHoldername: 'John Doe',
     daysToDormancy: 15,
     isFamilyVerified: true,
     lastUpdated: '2024-03-20',
@@ -94,6 +98,7 @@ export const accountData: Account[] = [
     isDormant: true,
     hasNominee: false,
     nominee: 'Jane Smith',
+    accountHoldername: 'Jane Smith',
     daysToDormancy: 30,
     isFamilyVerified: false,
     lastUpdated: '2024-03-19',
@@ -114,6 +119,7 @@ export const accountData: Account[] = [
     isDormant: false,
     hasNominee: true,
     nominee: 'Alice Johnson',
+    accountHoldername: 'Bob Johnson',
     daysToDormancy: 45,
     isFamilyVerified: true,
     lastUpdated: '2024-03-18',

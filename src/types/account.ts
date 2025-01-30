@@ -13,6 +13,7 @@ export interface Account {
   daysToDormancy?: number;
   lastUpdated?: string;
   nominee?: string | null;
+  accountHoldername?: string;
   recentTransactions?: {
     date: string;
     amount: number;
