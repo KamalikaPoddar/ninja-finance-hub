@@ -1,6 +1,6 @@
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Check, X, MoreVertical, Building2, AlertTriangle, Link2, User, ClipboardCheck, Users } from 'lucide-react';
+import { Check, X, MoreVertical, Building2, AlertTriangle, Link2, User, ClipboardCheck, Users, LucideIcon } from 'lucide-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Account } from '@/types/account';
 import { useState } from 'react';
@@ -10,10 +10,15 @@ interface AccountCardProps {
   onClick: () => void;
 }
 
+interface StatusIconProps {
+  isPositive: boolean;
+  Icon: LucideIcon;
+}
+
 const AccountCard = ({ account, onClick }: AccountCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const StatusIcon = ({ isPositive, Icon }: { isPositive: boolean; Icon: any }) => (
+  const StatusIcon = ({ isPositive, Icon }: StatusIconProps) => (
     <div className={`relative w-8 h-8 ${isPositive ? 'bg-purple-50' : 'bg-orange-50'} rounded-full flex items-center justify-center`}>
       <Icon className={`h-4 w-4 ${isPositive ? 'text-ninja-primary' : 'text-orange-400'}`} />
       {isPositive ? (
