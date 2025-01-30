@@ -1,6 +1,6 @@
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Check, MoreVertical, Building2, AlertTriangle, Link2 } from 'lucide-react';
+import { Check, X, MoreVertical, Building2, AlertTriangle, Link2, User, ClipboardCheck, Users } from 'lucide-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Account } from '@/types/account';
 import { useState } from 'react';
@@ -12,6 +12,17 @@ interface AccountCardProps {
 
 const AccountCard = ({ account, onClick }: AccountCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const StatusIcon = ({ isPositive, Icon }: { isPositive: boolean; Icon: any }) => (
+    <div className={`relative w-8 h-8 ${isPositive ? 'bg-purple-50' : 'bg-orange-50'} rounded-full flex items-center justify-center`}>
+      <Icon className={`h-4 w-4 ${isPositive ? 'text-ninja-primary' : 'text-orange-400'}`} />
+      {isPositive ? (
+        <Check className="h-3 w-3 text-ninja-primary absolute -top-1 -right-1" />
+      ) : (
+        <X className="h-3 w-3 text-orange-400 absolute -top-1 -right-1" />
+      )}
+    </div>
+  );
 
   return (
     <Card 
@@ -28,23 +39,22 @@ const AccountCard = ({ account, onClick }: AccountCardProps) => {
             </span>
           </div>
 
-          {/* Account Holder & Verification */}
+          {/* Account Holder & Nominee Status */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <span className="text-lg text-gray-700">
                 {account.accountHoldername || 'Account Holder'}
               </span>
-              {account.isFamilyVerified && (
-                <div className="w-8 h-8 bg-purple-50 rounded-full flex items-center justify-center">
-                  <Check className="h-4 w-4 text-ninja-primary" />
-                </div>
-              )}
             </div>
+            <StatusIcon isPositive={!!account.hasNominee} Icon={User} />
           </div>
 
-          {/* Account Type */}
-          <div className="text-lg text-gray-600">
-            {account.accountType}
+          {/* Account Type & Dormant Status */}
+          <div className="flex items-center justify-between">
+            <span className="text-lg text-gray-600">
+              {account.accountType}
+            </span>
+            <StatusIcon isPositive={!account.isDormant} Icon={ClipboardCheck} />
           </div>
 
           {/* Balance */}
@@ -52,8 +62,13 @@ const AccountCard = ({ account, onClick }: AccountCardProps) => {
             ₹{account.balance.toLocaleString('en-IN')}
           </div>
 
+          {/* Family Verification Status */}
+          <div className="flex justify-end mb-2">
+            <StatusIcon isPositive={!!account.isFamilyVerified} Icon={Users} />
+          </div>
+
           {/* View Details Button & Menu */}
-          <div className="flex items-center justify-between pt-4">
+          <div className="flex items-center justify-between">
             <Button 
               variant="secondary"
               className="bg-purple-50 hover:bg-purple-100 text-ninja-primary rounded-full px-6"
