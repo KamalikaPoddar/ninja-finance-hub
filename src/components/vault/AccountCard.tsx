@@ -21,7 +21,7 @@ const StatusIcon = ({ isPositive, Icon, tooltipText }: StatusIconProps) => (
   <TooltipProvider>
     <Tooltip>
       <TooltipTrigger asChild>
-        <div className={`relative w-8 h-8 ${isPositive ? 'bg-purple-50' : 'bg-orange-50'} rounded-full flex items-center justify-center cursor-help ml-2`}>
+        <div className={`relative w-8 h-8 ${isPositive ? 'bg-purple-50' : 'bg-orange-50'} rounded-full flex items-center justify-center cursor-help`}>
           <Icon className={`h-4 w-4 ${isPositive ? 'text-ninja-primary' : 'text-orange-400'}`} />
           {isPositive ? (
             <Check className="h-3 w-3 text-ninja-primary absolute -top-1 -right-1" />
@@ -42,64 +42,58 @@ const AccountCard = ({ account, onClick }: AccountCardProps) => {
 
   return (
     <Card 
-      className="w-full bg-white shadow-sm hover:shadow-md transition-shadow rounded-3xl overflow-hidden mb-16 last:mb-24"
+      className="w-full bg-white shadow-sm hover:shadow-md transition-shadow rounded-3xl overflow-hidden mb-4 last:mb-24"
       onClick={onClick}
     >
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <div className="p-6 space-y-4">
           {/* Bank Name and Logo */}
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Building2 className="h-6 w-6 text-ninja-primary" />
-              <span className="text-xl font-semibold text-gray-900">
+            <div className="flex items-center gap-3">
+              <span className="text-xl font-semibold text-ninja-primary">
                 {account.institutionName}
               </span>
+              <Building2 className="h-5 w-5 text-ninja-primary" />
             </div>
           </div>
 
-          {/* Account Holder & Nominee Status */}
+          {/* Account Holder & Status Icons */}
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3 flex-shrink min-w-0">
-              <span className="text-lg text-gray-700 truncate">
-                {account.accountHoldername || 'Account Holder'}
-              </span>
-            </div>
-            <StatusIcon 
-              isPositive={!!account.hasNominee} 
-              Icon={User} 
-              tooltipText={account.hasNominee ? "Nominee Registered" : "No Nominee Registered"}
-            />
-          </div>
-
-          {/* Account Type & Account Status */}
-          <div className="flex items-center justify-between">
-            <span className="text-lg text-gray-600 truncate mr-2">
-              {account.accountType}
+            <span className="text-lg text-gray-700">
+              {account.accountHoldername || 'Account Holder'}
             </span>
-            <StatusIcon 
-              isPositive={!account.isDormant} 
-              Icon={ClipboardCheck} 
-              tooltipText={account.isDormant ? "Account is Dormant" : "Account is Active"}
-            />
+            <div className="flex gap-2">
+              <StatusIcon 
+                isPositive={!!account.hasNominee} 
+                Icon={User} 
+                tooltipText={account.hasNominee ? "Nominee Registered" : "No Nominee Registered"}
+              />
+              <StatusIcon 
+                isPositive={!account.isDormant} 
+                Icon={ClipboardCheck} 
+                tooltipText={account.isDormant ? "Account is Dormant" : "Account is Active"}
+              />
+              <StatusIcon 
+                isPositive={!!account.isFamilyVerified} 
+                Icon={Users} 
+                tooltipText={account.isFamilyVerified ? "Family Verified" : "Family Not Verified"}
+              />
+            </div>
           </div>
 
-          {/* Balance & Family Verification */}
-          <div className="flex items-center justify-between">
-            <div className="text-3xl font-bold text-gray-900">
+          {/* Account Type & Balance */}
+          <div className="bg-purple-50 p-4 rounded-2xl">
+            <p className="text-ninja-primary mb-2">{account.accountType}</p>
+            <p className="text-2xl font-bold text-gray-900">
               ₹{account.balance.toLocaleString('en-IN')}
-            </div>
-            <StatusIcon 
-              isPositive={!!account.isFamilyVerified} 
-              Icon={Users} 
-              tooltipText={account.isFamilyVerified ? "Family Verified" : "Family Not Verified"}
-            />
+            </p>
           </div>
 
           {/* View Details Button & Menu */}
-          <div className="flex items-center justify-between mt-4">
+          <div className="flex items-center justify-between">
             <Button 
               variant="secondary"
-              className="bg-purple-50 hover:bg-purple-100 text-ninja-primary rounded-full px-6"
+              className="bg-ninja-primary hover:bg-ninja-secondary text-white rounded-full px-6"
               onClick={(e) => {
                 e.stopPropagation();
                 onClick();
