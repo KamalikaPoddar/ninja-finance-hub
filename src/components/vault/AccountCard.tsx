@@ -1,6 +1,6 @@
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Building2, MoreVertical, User, ClipboardCheck, Users, Check, X } from 'lucide-react';
+import { Building2, MoreVertical, User, ClipboardCheck, Users, Check, X, Link, AlertCircle } from 'lucide-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Account } from '@/types/account';
 import { useState } from 'react';
@@ -121,14 +121,14 @@ const AccountCard = ({ account, onClick }: AccountCardProps) => {
             {/* Additional Info */}
             {!account.isConnected && (
               <div className="flex items-center gap-2 text-red-600">
-                <Link2 className="h-4 w-4" />
+                <Link className="h-4 w-4" />
                 <span>Reconnection Required</span>
               </div>
             )}
             
             {account.isDormant && (
               <div className="flex items-center gap-2 text-amber-600">
-                <AlertTriangle className="h-4 w-4" />
+                <AlertCircle className="h-4 w-4" />
                 <span>Dormant Account</span>
               </div>
             )}
