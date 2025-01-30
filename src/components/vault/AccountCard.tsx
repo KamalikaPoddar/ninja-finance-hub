@@ -1,10 +1,9 @@
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Check, MoreVertical, Building2, AlertTriangle, Link2 } from 'lucide-react';
-import { theme } from '@/config/theme';
-import { useState } from 'react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Account } from '@/types/account';
+import { useState } from 'react';
 
 interface AccountCardProps {
   account: Account;

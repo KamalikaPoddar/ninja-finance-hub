@@ -7,7 +7,7 @@ import { theme } from '@/config/theme';
 
 export const VaultExpanded = () => {
   const navigate = useNavigate();
-  const accounts = accountData; // Using accountData instead of sampleAccounts
+  const accounts = accountData;
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: theme.colors.background }}> 
