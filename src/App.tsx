@@ -15,7 +15,7 @@ import AddFamilyMember from '@/pages/AddFamilyMember';
 import FamilyVerification from '@/pages/FamilyVerification';
 import VerifyRelationship from '@/pages/VerifyRelationship';
 import { Account } from '@/pages/Account';
-import { Home, Lock, User, Users } from 'lucide-react';
+import { Home, Lock, Wallet, Users } from 'lucide-react';
 
 const navItems = [
   {
@@ -31,7 +31,7 @@ const navItems = [
   {
     name: 'Accounts',
     url: '/account',
-    icon: User
+    icon: Wallet
   },
   {
     name: 'Family Tree',

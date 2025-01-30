@@ -1,6 +1,6 @@
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Check, X, MoreVertical, Building2, AlertTriangle, Link2, User, ClipboardCheck, Users, LucideIcon } from 'lucide-react';
+import { Building2, MoreVertical, User, ClipboardCheck, Users, Check, X } from 'lucide-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Account } from '@/types/account';
 import { useState } from 'react';
@@ -13,36 +13,36 @@ interface AccountCardProps {
 
 interface StatusIconProps {
   isPositive: boolean;
-  Icon: LucideIcon;
+  Icon: typeof User | typeof ClipboardCheck | typeof Users;
   tooltipText: string;
 }
+
+const StatusIcon = ({ isPositive, Icon, tooltipText }: StatusIconProps) => (
+  <TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <div className={`relative w-8 h-8 ${isPositive ? 'bg-purple-50' : 'bg-orange-50'} rounded-full flex items-center justify-center cursor-help ml-2`}>
+          <Icon className={`h-4 w-4 ${isPositive ? 'text-ninja-primary' : 'text-orange-400'}`} />
+          {isPositive ? (
+            <Check className="h-3 w-3 text-ninja-primary absolute -top-1 -right-1" />
+          ) : (
+            <X className="h-3 w-3 text-orange-400 absolute -top-1 -right-1" />
+          )}
+        </div>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>{tooltipText}</p>
+      </TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
+);
 
 const AccountCard = ({ account, onClick }: AccountCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const StatusIcon = ({ isPositive, Icon, tooltipText }: StatusIconProps) => (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <div className={`relative w-8 h-8 ${isPositive ? 'bg-purple-50' : 'bg-orange-50'} rounded-full flex items-center justify-center cursor-help`}>
-            <Icon className={`h-4 w-4 ${isPositive ? 'text-ninja-primary' : 'text-orange-400'}`} />
-            {isPositive ? (
-              <Check className="h-3 w-3 text-ninja-primary absolute -top-1 -right-1" />
-            ) : (
-              <X className="h-3 w-3 text-orange-400 absolute -top-1 -right-1" />
-            )}
-          </div>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>{tooltipText}</p>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
-  );
-
   return (
     <Card 
-      className="w-full bg-white shadow-sm hover:shadow-md transition-shadow rounded-3xl overflow-hidden"
+      className="w-full bg-white shadow-sm hover:shadow-md transition-shadow rounded-3xl overflow-hidden mb-16 last:mb-24"
       onClick={onClick}
     >
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
@@ -55,12 +55,6 @@ const AccountCard = ({ account, onClick }: AccountCardProps) => {
                 {account.institutionName}
               </span>
             </div>
-            {/* Family Verification Status */}
-            <StatusIcon 
-              isPositive={!!account.isFamilyVerified} 
-              Icon={Users} 
-              tooltipText={account.isFamilyVerified ? "Family Verified" : "Family Not Verified"}
-            />
           </div>
 
           {/* Account Holder & Nominee Status */}
@@ -77,7 +71,7 @@ const AccountCard = ({ account, onClick }: AccountCardProps) => {
             />
           </div>
 
-          {/* Account Type & Dormant Status */}
+          {/* Account Type & Account Status */}
           <div className="flex items-center justify-between">
             <span className="text-lg text-gray-600 truncate mr-2">
               {account.accountType}
@@ -89,9 +83,16 @@ const AccountCard = ({ account, onClick }: AccountCardProps) => {
             />
           </div>
 
-          {/* Balance */}
-          <div className="text-3xl font-bold text-gray-900">
-            ₹{account.balance.toLocaleString('en-IN')}
+          {/* Balance & Family Verification */}
+          <div className="flex items-center justify-between">
+            <div className="text-3xl font-bold text-gray-900">
+              ₹{account.balance.toLocaleString('en-IN')}
+            </div>
+            <StatusIcon 
+              isPositive={!!account.isFamilyVerified} 
+              Icon={Users} 
+              tooltipText={account.isFamilyVerified ? "Family Verified" : "Family Not Verified"}
+            />
           </div>
 
           {/* View Details Button & Menu */}
