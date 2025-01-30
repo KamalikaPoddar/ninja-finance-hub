@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { sampleAccounts } from '@/data/accounts';
+import { accountData } from '@/data/accounts';
 import AccountCard from '@/components/vault/AccountCard';
 import { ArrowLeft, Bell, User, Home, Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,7 +7,7 @@ import { theme } from '@/config/theme';
 
 export const VaultExpanded = () => {
   const navigate = useNavigate();
-  const accounts = sampleAccounts;
+  const accounts = accountData; // Using accountData instead of sampleAccounts
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: theme.colors.background }}> 
