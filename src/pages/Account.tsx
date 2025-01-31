@@ -36,8 +36,8 @@ export const Account = () => {
                   <div className="flex flex-col gap-2">
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                       account.hasNominee 
-                        ? 'bg-green-100 text-green-800' 
-                        : 'bg-red-100 text-red-800'
+                        ? 'bg-purple-50 text-purple-800' 
+                        : 'bg-yellow-50 text-yellow-800'
                     }`}>
                       {account.hasNominee ? 'Nominee Added' : 'No Nominee'}
                     </span>

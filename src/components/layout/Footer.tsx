@@ -1,24 +1,31 @@
+import React from "react";
 import { siteConfig } from "@/config/site";
+import { theme } from "@/config/theme";
+import "../../styles.css"; // Ensure this CSS is added to your project
 
 export const Footer = () => {
   return (
-    <footer className="bg-ninja-gray-100 py-8">
+    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p className="text-ninja-gray-600">{siteConfig.texts.footer.copyright}</p>
-          <nav className="flex space-x-6">
-            <a href="#" className="text-ninja-gray-600 hover:text-ninja-primary transition-colors">
-              Terms of Service
-            </a>
-            <a href="#" className="text-ninja-gray-600 hover:text-ninja-primary transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="text-ninja-gray-600 hover:text-ninja-primary transition-colors">
-              Contact Us
-            </a>
-          </nav>
+        <div className="flex justify-between items-center py-4">
+          <button className="flex flex-col items-center text-gray-500 hover:text-violet-500 transition-colors">
+            <span className="material-symbols-outlined">home</span>
+            <span className="text-xs">Home</span>
+          </button>
+          <button className="flex flex-col items-center text-violet-500">
+            <span className="material-symbols-outlined">lock</span>
+            <span className="text-xs">Vault</span>
+          </button>
+          <button className="flex flex-col items-center text-gray-500 hover:text-violet-500 transition-colors">
+            <span className="material-symbols-outlined">account_balance_wallet</span>
+            <span className="text-xs">Accounts</span>
+          </button>
+          <button className="flex flex-col items-center text-gray-500 hover:text-violet-500 transition-colors">
+            <span className="material-symbols-outlined">family_restroom</span>
+            <span className="text-xs">Family Tree</span>
+          </button>
         </div>
       </div>
-    </footer>
+    </nav>
   );
 };

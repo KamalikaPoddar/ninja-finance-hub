@@ -44,9 +44,10 @@ const Vault = () => {
         <div className="mb-8">
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold" style={{ color: theme.colors.text.primary }}>
-              Your Accounts
+              Your Vault
             </h1>
             <Button 
+              className="rounded-md"
               style={{ 
                 backgroundColor: theme.colors.primary,
                 color: theme.colors.surface
@@ -87,9 +88,10 @@ const Vault = () => {
         <div className="mb-8">
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold" style={{ color: theme.colors.text.primary }}>
-              Your Family Tree
+              Your Family 
             </h1>
             <Button 
+              className="rounded-md"
               style={{ 
                 backgroundColor: theme.colors.primary,
                 color: theme.colors.surface

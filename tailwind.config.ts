@@ -18,7 +18,6 @@ export default {
       },
     },
     extend: {
-      colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -53,7 +52,7 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         ninja: {
-          primary: "#6E59A5",
+          primary: "#913AEC",
           secondary: "#9b87f5",
           tertiary: "#D6BCFA",
           gray: {

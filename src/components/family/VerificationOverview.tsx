@@ -3,9 +3,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Mail, Upload, CheckCircle2, XCircle, Clock } from 'lucide-react';
+import { Mail, Upload, CheckCircle2, XCircle } from 'lucide-react';
 import { toast } from 'sonner';
 import { FamilyMember } from '@/types/family';
+import "../../pages/style.css"; // Ensure this CSS is added to your project
 
 interface VerificationOverviewProps {
   member: FamilyMember;
@@ -29,7 +30,7 @@ export const VerificationOverview = ({ member }: VerificationOverviewProps) => {
 
   const getStatusIcon = () => {
     if (member.isVerified) return <CheckCircle2 className="text-green-500" />;
-    return <Clock className="text-yellow-500" />;
+    return <span className="material-symbols-outlined">family_restroom</span>;
   };
 
   return (
