@@ -12,9 +12,11 @@ interface AccountCardProps {
   onClick: () => void;
 }
 
+type IconComponent = typeof User | typeof ClipboardCheck | typeof FamilyIcon;
+
 interface StatusIconProps {
   isPositive: boolean;
-  Icon: typeof User | typeof ClipboardCheck | typeof FamilyIcon;
+  Icon: IconComponent;
   tooltipText: string;
 }
 
