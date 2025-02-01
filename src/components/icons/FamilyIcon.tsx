@@ -1,8 +1,10 @@
-import { LucideIcon } from 'lucide-react';
+import { forwardRef } from 'react';
+import type { LucideIcon, LucideProps } from 'lucide-react';
 
-export const FamilyIcon: LucideIcon = function FamilyIcon(props) {
+export const FamilyIcon: LucideIcon = forwardRef<SVGSVGElement, LucideProps>((props, ref) => {
   return (
     <svg
+      ref={ref}
       width="24"
       height="24"
       viewBox="0 0 502.102 502.102"
@@ -21,4 +23,6 @@ export const FamilyIcon: LucideIcon = function FamilyIcon(props) {
       </g>
     </svg>
   );
-};
+});
+
+FamilyIcon.displayName = 'FamilyIcon';

@@ -1,6 +1,7 @@
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Building2, MoreVertical, User, ClipboardCheck, Users, Check, X, Link, AlertCircle } from 'lucide-react';
+import { Building2, MoreVertical, ClipboardCheck, Check, X, Link, AlertCircle } from 'lucide-react';
+import { FamilyIcon } from '@/components/icons/FamilyIcon';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Account } from '@/types/account';
 import { useState } from 'react';
@@ -13,7 +14,7 @@ interface AccountCardProps {
 
 interface StatusIconProps {
   isPositive: boolean;
-  Icon: typeof User | typeof ClipboardCheck | typeof Users;
+  Icon: typeof ClipboardCheck | typeof FamilyIcon;
   tooltipText: string;
 }
 
@@ -65,7 +66,7 @@ const AccountCard = ({ account, onClick }: AccountCardProps) => {
             <div className="flex gap-2">
               <StatusIcon 
                 isPositive={!!account.hasNominee} 
-                Icon={User} 
+                Icon={FamilyIcon} 
                 tooltipText={account.hasNominee ? "Nominee Registered" : "No Nominee Registered"}
               />
               <StatusIcon 
@@ -75,7 +76,7 @@ const AccountCard = ({ account, onClick }: AccountCardProps) => {
               />
               <StatusIcon 
                 isPositive={!!account.isFamilyVerified} 
-                Icon={Users} 
+                Icon={FamilyIcon} 
                 tooltipText={account.isFamilyVerified ? "Family Verified" : "Family Not Verified"}
               />
             </div>
