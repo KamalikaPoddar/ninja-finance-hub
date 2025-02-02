@@ -6,17 +6,16 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import { Account } from '@/types/account';
 import { useState } from 'react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import type { LucideIcon } from 'lucide-react';
 
 interface AccountCardProps {
   account: Account;
   onClick: () => void;
 }
 
-type IconComponent = typeof User | typeof ClipboardCheck | typeof FamilyIcon;
-
 interface StatusIconProps {
   isPositive: boolean;
-  Icon: IconComponent;
+  Icon: LucideIcon;
   tooltipText: string;
 }
 
