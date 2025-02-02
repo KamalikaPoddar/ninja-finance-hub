@@ -1,6 +1,4 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, DollarSign } from 'lucide-react';
 import { accountData } from '@/data/accounts';
 import { theme } from '@/config/theme';
 import FamilyTreeComponent from '@/components/family/FamilyTree';
@@ -9,30 +7,7 @@ import PartnerOfferCard from '@/components/vault/PartnerOfferCard';
 import type { FamilyTree } from '@/types/family';
 import { Toaster } from '@/components/ui/sonner';
 import { toast } from 'sonner';
-
-const partnerOffers = [
-  {
-    id: '1',
-    title: "Partner Offer #1",
-    description: "Special discount on premium services with exclusive benefits for members.",
-    validUntil: "Dec 2024",
-    isActive: true,
-  },
-  {
-    id: '2',
-    title: "Partner Offer #2",
-    description: "Special investment opportunities with reduced fees for members.",
-    validUntil: "Jan 2025",
-    isActive: true,
-  },
-  {
-    id: '3',
-    title: "Partner Offer #3",
-    description: "Exclusive insurance coverage with special rates for members.",
-    validUntil: "Mar 2025",
-    isActive: false,
-  },
-];
+import { Lock } from 'lucide-react';
 
 const Vault = () => {
   const navigate = useNavigate();
@@ -53,6 +28,30 @@ const Vault = () => {
     ]
   });
 
+  const partnerOffers = [
+    {
+      id: '1',
+      title: "Partner Offer #1",
+      description: "Special discount on premium services with exclusive benefits for members.",
+      validUntil: "Dec 2024",
+      isActive: true,
+    },
+    {
+      id: '2',
+      title: "Partner Offer #2",
+      description: "Special investment opportunities with reduced fees for members.",
+      validUntil: "Jan 2025",
+      isActive: true,
+    },
+    {
+      id: '3',
+      title: "Partner Offer #3",
+      description: "Exclusive insurance coverage with special rates for members.",
+      validUntil: "Mar 2025",
+      isActive: false,
+    },
+  ];
+
   const handleNavigation = (path: string, message: string) => {
     toast(message);
     navigate(path);
@@ -69,39 +68,7 @@ const Vault = () => {
             atRiskAccounts={accounts.filter(a => a.isDormant).length}
           />
 
-          <div className="grid grid-cols-2 gap-6 mb-8 mt-8">
-            <div 
-              className="p-6 rounded-xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
-              onClick={() => handleNavigation('/discover-accounts', 'Feature coming soon: Discover Lost Accounts')}
-            >
-              <div className="flex items-center gap-4">
-                <div className="p-3 rounded-full bg-violet-50">
-                  <Search className="w-6 h-6 text-violet-500" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-semibold mb-1">Discover Lost Accounts</h3>
-                  <p className="text-gray-500 text-sm">Find forgotten accounts and assets</p>
-                </div>
-              </div>
-            </div>
-
-            <div 
-              className="p-6 rounded-xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
-              onClick={() => handleNavigation('/finance-dream', 'Feature coming soon: Finance Your Dream')}
-            >
-              <div className="flex items-center gap-4">
-                <div className="p-3 rounded-full bg-violet-50">
-                  <DollarSign className="w-6 h-6 text-violet-500" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-semibold mb-1">Finance Your Dream</h3>
-                  <p className="text-gray-500 text-sm">Explore financing options</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mb-8">
+          <div className="mb-4">
             <div className="relative w-full h-[400px] overflow-hidden">
               <div className="absolute w-[calc(340px*25)] flex flex-row items-center animate-infinite-scroll">
                 {Array.from({ length: 25 }, (_, index) => {
@@ -120,7 +87,7 @@ const Vault = () => {
             </div>
           </div>
 
-          <div className="mb-8 mt-8">
+          <div className="mb-4">
             <div className="flex justify-between items-center mb-6">
               <h1 className="text-2xl font-bold" style={{ color: theme.colors.text.primary }}>
                 Your Family 
@@ -132,6 +99,29 @@ const Vault = () => {
               style={{ backgroundColor: theme.colors.surface }}
             >
               <FamilyTreeComponent family={familyData} />
+            </div>
+          </div>
+
+          {/* Locked sections */}
+          <div className="space-y-4">
+            <div className="p-6 rounded-lg bg-gray-50 border border-gray-200">
+              <div className="flex items-center gap-3">
+                <Lock className="text-gray-400" />
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-400">Discover Lost Accounts</h3>
+                  <p className="text-sm text-gray-500">Complete family verification to unlock this feature</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-6 rounded-lg bg-gray-50 border border-gray-200">
+              <div className="flex items-center gap-3">
+                <Lock className="text-gray-400" />
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-400">Finance Your Dreams</h3>
+                  <p className="text-sm text-gray-500">Complete family verification to unlock this feature</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
