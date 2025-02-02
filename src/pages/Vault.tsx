@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Search, DollarSign } from 'lucide-react';
 import { accountData } from '@/data/accounts';
 import { theme } from '@/config/theme';
 import FamilyTreeComponent from '@/components/family/FamilyTree';
@@ -29,6 +30,7 @@ const partnerOffers = [
 ];
 
 const Vault = () => {
+  const navigate = useNavigate();
   const accounts = accountData;
   const isFamilyVerified = accounts[0].isFamilyVerified;
 
@@ -56,6 +58,41 @@ const Vault = () => {
           missingNominees={accounts.filter(a => !a.hasNominee).length}
           atRiskAccounts={accounts.filter(a => a.isDormant).length}
         />
+
+        {/* Quick Actions Section */}
+        <div className="grid grid-cols-2 gap-6 mb-8 mt-8">
+          {/* Discover Lost Accounts Card */}
+          <div 
+            className="p-6 rounded-xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
+            onClick={() => navigate('/discover-accounts')}
+          >
+            <div className="flex items-center gap-4">
+              <div className="p-3 rounded-full bg-violet-50">
+                <Search className="w-6 h-6 text-violet-500" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-xl font-semibold mb-1">Discover Lost Accounts</h3>
+                <p className="text-gray-500 text-sm">Find forgotten accounts and assets</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Finance Your Dream Card */}
+          <div 
+            className="p-6 rounded-xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
+            onClick={() => navigate('/finance-dream')}
+          >
+            <div className="flex items-center gap-4">
+              <div className="p-3 rounded-full bg-violet-50">
+                <DollarSign className="w-6 h-6 text-violet-500" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-xl font-semibold mb-1">Finance Your Dream</h3>
+                <p className="text-gray-500 text-sm">Explore financing options</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Partner Offers Section */}
         <div className="mb-8">
