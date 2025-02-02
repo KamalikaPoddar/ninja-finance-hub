@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { accountData } from '@/data/accounts';
 import { theme } from '@/config/theme';
@@ -68,7 +69,7 @@ const Vault = () => {
             atRiskAccounts={accounts.filter(a => a.isDormant).length}
           />
 
-          <div className="mb-4">
+          <div className="mb-2">
             <div className="relative w-full h-[400px] overflow-hidden">
               <div className="absolute w-[calc(340px*25)] flex flex-row items-center animate-infinite-scroll">
                 {Array.from({ length: 25 }, (_, index) => {
@@ -87,7 +88,7 @@ const Vault = () => {
             </div>
           </div>
 
-          <div className="mb-4">
+          <div className="mb-8">
             <div className="flex justify-between items-center mb-6">
               <h1 className="text-2xl font-bold" style={{ color: theme.colors.text.primary }}>
                 Your Family 
@@ -102,7 +103,6 @@ const Vault = () => {
             </div>
           </div>
 
-          {/* Locked sections */}
           <div className="space-y-4">
             <div className="p-6 rounded-lg bg-gray-50 border border-gray-200">
               <div className="flex items-center gap-3">
