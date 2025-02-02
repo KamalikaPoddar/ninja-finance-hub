@@ -8,6 +8,7 @@ import AccountSummary from '@/components/vault/AccountSummary';
 import PartnerOfferCard from '@/components/vault/PartnerOfferCard';
 import type { FamilyTree } from '@/types/family';
 import { toast } from 'sonner';
+import { Toaster } from '@/components/ui/sonner';
 
 const partnerOffers = [
   {
@@ -36,7 +37,6 @@ const Vault = () => {
   const accounts = accountData;
   console.log('Accounts data:', accounts);
 
-  // Ensure we have at least one account before accessing index 0
   const isFamilyVerified = accounts.length > 0 ? accounts[0].isFamilyVerified : false;
   console.log('Family verification status:', isFamilyVerified);
 
@@ -58,89 +58,90 @@ const Vault = () => {
   const handleNavigation = (path: string, message: string) => {
     console.log(`Navigating to: ${path}`);
     toast.info(message);
-    // For now, we'll prevent navigation since these routes don't exist
-    // navigate(path);
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)]" style={{ backgroundColor: theme.colors.background }}>
-      <div className="max-w-4xl mx-auto p-6 pt-8 pb-24">
-        {/* Account Summary */}
-        <AccountSummary 
-          linkedAccounts={accounts.length}
-          missingNominees={accounts.filter(a => !a.hasNominee).length}
-          atRiskAccounts={accounts.filter(a => a.isDormant).length}
-        />
+    <>
+      <Toaster />
+      <div className="min-h-[calc(100vh-4rem)]" style={{ backgroundColor: theme.colors.background }}>
+        <div className="max-w-4xl mx-auto p-6 pt-8 pb-24">
+          {/* Account Summary */}
+          <AccountSummary 
+            linkedAccounts={accounts.length}
+            missingNominees={accounts.filter(a => !a.hasNominee).length}
+            atRiskAccounts={accounts.filter(a => a.isDormant).length}
+          />
 
-        {/* Quick Actions Section */}
-        <div className="grid grid-cols-2 gap-6 mb-8 mt-8">
-          {/* Discover Lost Accounts Card */}
-          <div 
-            className="p-6 rounded-xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
-            onClick={() => handleNavigation('/discover-accounts', 'Feature coming soon: Discover Lost Accounts')}
-          >
-            <div className="flex items-center gap-4">
-              <div className="p-3 rounded-full bg-violet-50">
-                <Search className="w-6 h-6 text-violet-500" />
+          {/* Quick Actions Section */}
+          <div className="grid grid-cols-2 gap-6 mb-8 mt-8">
+            {/* Discover Lost Accounts Card */}
+            <div 
+              className="p-6 rounded-xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
+              onClick={() => handleNavigation('/discover-accounts', 'Feature coming soon: Discover Lost Accounts')}
+            >
+              <div className="flex items-center gap-4">
+                <div className="p-3 rounded-full bg-violet-50">
+                  <Search className="w-6 h-6 text-violet-500" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold mb-1">Discover Lost Accounts</h3>
+                  <p className="text-gray-500 text-sm">Find forgotten accounts and assets</p>
+                </div>
               </div>
-              <div className="flex-1">
-                <h3 className="text-xl font-semibold mb-1">Discover Lost Accounts</h3>
-                <p className="text-gray-500 text-sm">Find forgotten accounts and assets</p>
+            </div>
+
+            {/* Finance Your Dream Card */}
+            <div 
+              className="p-6 rounded-xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
+              onClick={() => handleNavigation('/finance-dream', 'Feature coming soon: Finance Your Dream')}
+            >
+              <div className="flex items-center gap-4">
+                <div className="p-3 rounded-full bg-violet-50">
+                  <DollarSign className="w-6 h-6 text-violet-500" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold mb-1">Finance Your Dream</h3>
+                  <p className="text-gray-500 text-sm">Explore financing options</p>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Finance Your Dream Card */}
-          <div 
-            className="p-6 rounded-xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
-            onClick={() => handleNavigation('/finance-dream', 'Feature coming soon: Finance Your Dream')}
-          >
-            <div className="flex items-center gap-4">
-              <div className="p-3 rounded-full bg-violet-50">
-                <DollarSign className="w-6 h-6 text-violet-500" />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-xl font-semibold mb-1">Finance Your Dream</h3>
-                <p className="text-gray-500 text-sm">Explore financing options</p>
+          {/* Partner Offers Section */}
+          <div className="mb-8">
+            <div className="relative w-full h-[400px] overflow-hidden">
+              <div className="absolute w-[calc(340px*25)] flex flex-row items-center animate-infinite-scroll">
+                {Array.from({ length: 25 }, (_, index) => {
+                  const offer = partnerOffers[index % partnerOffers.length];
+                  return (
+                    <PartnerOfferCard
+                      key={`partner-offer-${index}`}
+                      {...offer}
+                    />
+                  );
+                })}
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Partner Offers Section */}
-        <div className="mb-8">
-          <div className="relative w-full h-[400px] overflow-hidden">
-            <div className="absolute w-[calc(340px*25)] flex flex-row items-center animate-infinite-scroll">
-              {Array.from({ length: 25 }, (_, index) => {
-                const offer = partnerOffers[index % partnerOffers.length];
-                return (
-                  <PartnerOfferCard
-                    key={`partner-offer-${index}`}
-                    {...offer}
-                  />
-                );
-              })}
+          {/* Family Tree Section */}
+          <div className="mb-8 mt-8">
+            <div className="flex justify-between items-center mb-6">
+              <h1 className="text-2xl font-bold" style={{ color: theme.colors.text.primary }}>
+                Your Family 
+              </h1>
             </div>
-          </div>
-        </div>
 
-        {/* Family Tree Section */}
-        <div className="mb-8 mt-8">
-          <div className="flex justify-between items-center mb-6">
-            <h1 className="text-2xl font-bold" style={{ color: theme.colors.text.primary }}>
-              Your Family 
-            </h1>
-          </div>
-
-          <div 
-            className="p-6 rounded-lg" 
-            style={{ backgroundColor: theme.colors.surface }}
-          >
-            <FamilyTreeComponent family={familyData} />
+            <div 
+              className="p-6 rounded-lg" 
+              style={{ backgroundColor: theme.colors.surface }}
+            >
+              <FamilyTreeComponent family={familyData} />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
