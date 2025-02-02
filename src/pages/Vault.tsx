@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { sampleAccounts } from '@/data/accounts';
+import { accountData } from '@/data/accounts';
 import { theme } from '@/config/theme';
 import FamilyTreeComponent from '@/components/family/FamilyTree';
 import AccountSummary from '@/components/vault/AccountSummary';
@@ -29,7 +29,7 @@ const partnerOffers = [
 ];
 
 const Vault = () => {
-  const accounts = sampleAccounts;
+  const accounts = accountData;
   const isFamilyVerified = accounts[0].isFamilyVerified;
 
   const [familyData] = useState<FamilyTree>({
@@ -49,7 +49,7 @@ const Vault = () => {
 
   return (
     <div className="min-h-[calc(100vh-4rem)]" style={{ backgroundColor: theme.colors.background }}>
-      <div className="max-w-4xl mx-auto p-6 pt-24 pb-24">
+      <div className="max-w-4xl mx-auto p-6 pt-8 pb-24">
         {/* Account Summary */}
         <AccountSummary 
           linkedAccounts={accounts.length}
@@ -75,7 +75,7 @@ const Vault = () => {
         </div>
 
         {/* Family Tree Section */}
-        <div className="mb-8">
+        <div className="mb-8 mt-8">
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold" style={{ color: theme.colors.text.primary }}>
               Your Family 

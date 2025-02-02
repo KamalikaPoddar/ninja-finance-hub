@@ -10,19 +10,19 @@ export const VaultExpanded = () => {
   const accounts = accountData;
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: theme.colors.background }}> 
+    <div className="min-h-screen">
       <div className="w-full md:w-[1200px] min-h-[calc(100vh-4rem)] bg-white rounded-lg shadow-sm flex flex-col relative mx-auto">
-        <header className="w-full bg-white p-4 flex items-center justify-between shadow-sm fixed top-0 z-10">
+        <header className="w-full bg-ninja-primary p-4 flex items-center justify-between fixed top-0 z-10">
           <div className="flex items-center gap-4">
-            <Button 
-              variant="outline"
+            <Button
+              variant="default"
               size="icon"
               className="rounded-full"
               onClick={() => navigate('/vault')}
             >
               <ArrowLeft className="h-4 w-4" />
             </Button>
-            <h1 className="text-3xl font-semibold text-neutral-950">Your Vault</h1>
+            <h1 className="text-3xl font-semibold text-white">Your Vault</h1>
           </div>
           <div className="flex items-center gap-4">
             <Button variant="outline" size="icon" className="rounded-full">
@@ -34,7 +34,7 @@ export const VaultExpanded = () => {
           </div>
         </header>
       
-        <div className="p-6 flex flex-col gap-8 mt-16 overflow-y-auto pb-20">
+        <div className="p-6 flex flex-col gap-8 mt-8 overflow-y-auto pb-20">
           <section className="flex flex-col gap-4">
             {accounts.map((account) => (
               <AccountCard
