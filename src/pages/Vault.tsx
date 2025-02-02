@@ -30,9 +30,14 @@ const partnerOffers = [
 ];
 
 const Vault = () => {
+  console.log('Rendering Vault component');
   const navigate = useNavigate();
   const accounts = accountData;
-  const isFamilyVerified = accounts[0].isFamilyVerified;
+  console.log('Accounts data:', accounts);
+
+  // Ensure we have at least one account before accessing index 0
+  const isFamilyVerified = accounts.length > 0 ? accounts[0].isFamilyVerified : false;
+  console.log('Family verification status:', isFamilyVerified);
 
   const [familyData] = useState<FamilyTree>({
     parents: [
@@ -64,7 +69,10 @@ const Vault = () => {
           {/* Discover Lost Accounts Card */}
           <div 
             className="p-6 rounded-xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
-            onClick={() => navigate('/discover-accounts')}
+            onClick={() => {
+              console.log('Navigating to discover accounts');
+              navigate('/discover-accounts');
+            }}
           >
             <div className="flex items-center gap-4">
               <div className="p-3 rounded-full bg-violet-50">
@@ -80,7 +88,10 @@ const Vault = () => {
           {/* Finance Your Dream Card */}
           <div 
             className="p-6 rounded-xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
-            onClick={() => navigate('/finance-dream')}
+            onClick={() => {
+              console.log('Navigating to finance dream');
+              navigate('/finance-dream');
+            }}
           >
             <div className="flex items-center gap-4">
               <div className="p-3 rounded-full bg-violet-50">
@@ -102,7 +113,7 @@ const Vault = () => {
                 const offer = partnerOffers[index % partnerOffers.length];
                 return (
                   <PartnerOfferCard
-                    key={index}
+                    key={`partner-offer-${index}`}
                     {...offer}
                   />
                 );
