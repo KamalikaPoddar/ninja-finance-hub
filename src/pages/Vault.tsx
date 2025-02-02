@@ -38,8 +38,6 @@ const Vault = () => {
   const navigate = useNavigate();
   const accounts = accountData || [];
 
-  const isFamilyVerified = accounts.length > 0 ? accounts[0].isFamilyVerified : false;
-
   const [familyData] = useState<FamilyTree>({
     parents: [
       { id: '1', name: 'John Doe', relationship: 'parent', isVerified: true },
