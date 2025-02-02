@@ -1,12 +1,12 @@
 import { forwardRef } from 'react';
 import type { LucideIcon, LucideProps } from 'lucide-react';
 
-export const FamilyIcon: LucideIcon = forwardRef<SVGSVGElement, LucideProps>((props, ref) => {
+export const FamilyIcon: LucideIcon = forwardRef<SVGSVGElement, LucideProps>(({ size = 24, ...props }, ref) => {
   return (
     <svg
       ref={ref}
-      width="24"
-      height="24"
+      width={size}
+      height={size}
       viewBox="0 0 502.102 502.102"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
