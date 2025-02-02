@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { TermsAndConditionsDialog } from "@/components/ui/terms-and-conditions-dialog";
 import { useForm } from "react-hook-form";
 import { Eye, EyeOff, AtSign, Phone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -30,6 +31,8 @@ type SignupFormData = {
   acceptTerms: boolean;
 };
 
+export type { SignupFormData };
+
 type LoginFormData = {
   identifier: string;
   password?: string;
@@ -43,6 +46,7 @@ const Signup = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showLoginPassword, setShowLoginPassword] = useState(false);
   const [useOTP, setUseOTP] = useState(false);
+  const [isTermsDialogOpen, setIsTermsDialogOpen] = useState(false);
 
   const signupForm = useForm<SignupFormData>({
     defaultValues: {
@@ -105,7 +109,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background pt-16 md:pt-20">
+    <div className="min-h-screen bg-background pt-16 md:pt-20 pb-16">
       <div className="container max-w-lg mx-auto px-4 py-8">
         <Tabs defaultValue="signup" className="w-full">
           <TabsList className="grid w-full grid-cols-2">
@@ -327,7 +331,7 @@ const Signup = () => {
                             type="checkbox"
                             checked={field.value}
                             onChange={field.onChange}
-                            className="mt-1"
+                            className="mt-1 text-ninja-primary focus:ring-ninja-primary border-ninja-primary"
                           />
                         </FormControl>
                         <div className="space-y-1 leading-none">
@@ -335,6 +339,10 @@ const Signup = () => {
                             By joining, you agree to our{" "}
                             <a
                               href="#"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setIsTermsDialogOpen(true);
+                              }}
                               className="text-ninja-primary hover:underline"
                             >
                               Terms and Conditions
@@ -353,6 +361,11 @@ const Signup = () => {
                   </Button>
                 </form>
               </Form>
+              <TermsAndConditionsDialog
+                 isOpen={isTermsDialogOpen}
+                 onOpenChange={setIsTermsDialogOpen}
+                 formSetValue={signupForm.setValue}
+               />
             </div>
           </TabsContent>
 
