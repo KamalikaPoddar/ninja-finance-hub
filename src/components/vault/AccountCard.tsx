@@ -85,9 +85,9 @@ const AccountCard = ({ account, onClick }: AccountCardProps) => {
           </div>
 
           {/* Account Type & Balance */}
-          <div className="bg-purple-50 p-4 rounded-2xl">
-            <p className="text-ninja-primary mb-2">{account.accountType}</p>
-            <p className="text-2xl font-bold text-gray-900">
+          <div className="bg-purple-100 p-4 rounded-2xl">
+            <p className="text-gray-500 mb-2">{account.accountType}</p>
+            <p className="text-3xl font-bold text-ninja-primary">
               ₹{account.balance.toLocaleString('en-IN')}
             </p>
           </div>
