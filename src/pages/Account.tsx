@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import { Check, X, AlertCircle } from 'lucide-react';
 
 export const Account = () => {
+  console.log('Account data:', accountData);
   return (
     <div className="min-h-screen" style={{ backgroundColor: theme.colors.background }}>
       <Header />
@@ -36,8 +37,8 @@ export const Account = () => {
                   <div className="flex flex-col gap-2">
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                       account.hasNominee 
-                        ? 'bg-purple-50 text-purple-800' 
-                        : 'bg-yellow-50 text-yellow-800'
+                        ? 'bg-green-100 text-green-800' 
+                        : 'bg-red-100 text-red-800'
                     }`}>
                       {account.hasNominee ? 'Nominee Added' : 'No Nominee'}
                     </span>

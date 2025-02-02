@@ -26,7 +26,7 @@ export const TermsAndConditionsDialog = (props: TermsAndConditionsDialogProps) =
       <AlertDialogContent className="max-w-md rounded-xl bg-white text-black shadow-lg border">
         <AlertDialogHeader className="flex flex-row justify-between items-center">
           <AlertDialogTitle className="text-lg font-semibold">Terms of Use</AlertDialogTitle>
-          <AlertDialogCancel>
+          <AlertDialogCancel className="hover:bg-gray-200 rounded-md p-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"

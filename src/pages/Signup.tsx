@@ -331,7 +331,7 @@ const Signup = () => {
                             type="checkbox"
                             checked={field.value}
                             onChange={field.onChange}
-                            className="mt-1 text-ninja-primary focus:ring-ninja-primary border-ninja-primary"
+                            className="mt-1 text-[#913AEC] focus:ring-[#913AEC] border-[#913AEC]"
                           />
                         </FormControl>
                         <div className="space-y-1 leading-none">
