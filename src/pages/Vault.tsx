@@ -7,6 +7,7 @@ import FamilyTreeComponent from '@/components/family/FamilyTree';
 import AccountSummary from '@/components/vault/AccountSummary';
 import PartnerOfferCard from '@/components/vault/PartnerOfferCard';
 import type { FamilyTree } from '@/types/family';
+import { toast } from 'sonner';
 
 const partnerOffers = [
   {
@@ -54,6 +55,13 @@ const Vault = () => {
     ]
   });
 
+  const handleNavigation = (path: string, message: string) => {
+    console.log(`Navigating to: ${path}`);
+    toast.info(message);
+    // For now, we'll prevent navigation since these routes don't exist
+    // navigate(path);
+  };
+
   return (
     <div className="min-h-[calc(100vh-4rem)]" style={{ backgroundColor: theme.colors.background }}>
       <div className="max-w-4xl mx-auto p-6 pt-8 pb-24">
@@ -69,10 +77,7 @@ const Vault = () => {
           {/* Discover Lost Accounts Card */}
           <div 
             className="p-6 rounded-xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
-            onClick={() => {
-              console.log('Navigating to discover accounts');
-              navigate('/discover-accounts');
-            }}
+            onClick={() => handleNavigation('/discover-accounts', 'Feature coming soon: Discover Lost Accounts')}
           >
             <div className="flex items-center gap-4">
               <div className="p-3 rounded-full bg-violet-50">
@@ -88,10 +93,7 @@ const Vault = () => {
           {/* Finance Your Dream Card */}
           <div 
             className="p-6 rounded-xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
-            onClick={() => {
-              console.log('Navigating to finance dream');
-              navigate('/finance-dream');
-            }}
+            onClick={() => handleNavigation('/finance-dream', 'Feature coming soon: Finance Your Dream')}
           >
             <div className="flex items-center gap-4">
               <div className="p-3 rounded-full bg-violet-50">
