@@ -88,8 +88,8 @@ const Vault = () => {
             </div>
           </div>
 
-          <div className="mb-8">
-            <div className="flex justify-between items-center mb-6">
+          <div className="mb-2">
+            <div className="flex justify-between items-center mb-2">
               <h1 className="text-2xl font-bold" style={{ color: theme.colors.text.primary }}>
                 Your Family 
               </h1>
