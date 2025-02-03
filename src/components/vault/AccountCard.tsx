@@ -1,6 +1,6 @@
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Building2, MoreVertical, User, ClipboardCheck, Check, X, Link, AlertCircle } from 'lucide-react';
+import { Building2, MoreVertical, User, ClipboardCheck, Check, X, Link, AlertTriangle } from 'lucide-react';
 import { FamilyIcon } from '@/components/icons/FamilyIcon';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Account } from '@/types/account';
@@ -17,27 +17,51 @@ interface StatusIconProps {
   isPositive: boolean;
   Icon: LucideIcon;
   tooltipText: string;
+  showIcon?: boolean;
 }
 
-const StatusIcon = ({ isPositive, Icon, tooltipText }: StatusIconProps) => (
-  <TooltipProvider>
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <div className={`relative w-8 h-8 ${isPositive ? 'bg-purple-50' : 'bg-orange-50'} rounded-full flex items-center justify-center cursor-help`}>
-          <Icon className={`h-4 w-4 ${isPositive ? 'text-ninja-primary' : 'text-orange-400'}`} />
-          {isPositive ? (
-            <Check className="h-3 w-3 text-ninja-primary absolute -top-1 -right-1" />
-          ) : (
-            <X className="h-3 w-3 text-orange-400 absolute -top-1 -right-1" />
-          )}
-        </div>
-      </TooltipTrigger>
-      <TooltipContent>
-        <p>{tooltipText}</p>
-      </TooltipContent>
-    </Tooltip>
-  </TooltipProvider>
-);
+const StatusIcon = ({ isPositive, Icon, tooltipText, showIcon = true }: StatusIconProps) => {
+  if (!showIcon) return null;
+  
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <div className={`relative w-8 h-8 ${isPositive ? 'bg-purple-50' : 'bg-red-50'} rounded-full flex items-center justify-center cursor-help`}>
+            <Icon className={`h-4 w-4 ${isPositive ? 'text-ninja-primary' : 'text-red-400'}`} />
+            {isPositive ? (
+              <Check className="h-3 w-3 text-ninja-primary absolute -top-1 -right-1" />
+            ) : (
+              <X className="h-3 w-3 text-red-400 absolute -top-1 -right-1" />
+            )}
+          </div>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>{tooltipText}</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
+};
+
+const DormancyIcon = ({ isDormant }: { isDormant: boolean }) => {
+  if (!isDormant) return null;
+  
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <div className="relative w-8 h-8 bg-yellow-50 rounded-full flex items-center justify-center cursor-help">
+            <AlertTriangle className="h-4 w-4 text-yellow-500" />
+          </div>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>This account is at risk of becoming dormant</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
+};
 
 const AccountCard = ({ account, onClick }: AccountCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -68,17 +92,13 @@ const AccountCard = ({ account, onClick }: AccountCardProps) => {
               <StatusIcon 
                 isPositive={!!account.hasNominee} 
                 Icon={User} 
-                tooltipText={account.hasNominee ? "Nominee Registered" : "No Nominee Registered"}
+                tooltipText={account.hasNominee ? "Nominee is registered" : "No nominee registered"}
               />
-              <StatusIcon 
-                isPositive={!account.isDormant} 
-                Icon={ClipboardCheck} 
-                tooltipText={account.isDormant ? "Account is Dormant" : "Account is Active"}
-              />
+              <DormancyIcon isDormant={!!account.isDormant} />
               <StatusIcon 
                 isPositive={!!account.isFamilyVerified} 
                 Icon={FamilyIcon} 
-                tooltipText={account.isFamilyVerified ? "Family Verified" : "Family Not Verified"}
+                tooltipText={account.isFamilyVerified ? "Family is verified" : "Family verification pending"}
               />
             </div>
           </div>
@@ -122,13 +142,6 @@ const AccountCard = ({ account, onClick }: AccountCardProps) => {
               </div>
             )}
             
-            {account.isDormant && (
-              <div className="flex items-center gap-2 text-amber-600">
-                <AlertCircle className="h-4 w-4" />
-                <span>Dormant Account</span>
-              </div>
-            )}
-
             {account.lastTransactionDate && (
               <div className="text-sm text-gray-600">
                 Last Transaction: {new Date(account.lastTransactionDate).toLocaleDateString()}
